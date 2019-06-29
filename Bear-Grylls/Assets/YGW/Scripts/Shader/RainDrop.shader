@@ -17,6 +17,8 @@
 		_Scale("Scale", Range(0, 10)) = 6
 		_LifeTime("LifeTime", Range(0, 10)) = 1
 		_Alpha("Alpha", Range(0, 1)) = 0.5
+		_RainAmount("RainAmount", Range(0.5, 1)) = 1
+		_T("T", Range(0, 1)) = 0.25
 	}
 		SubShader
 		{
@@ -62,7 +64,7 @@
 				{
 					float2 UV = uv;
 
-					uv.y += t * _DropSpeed;
+					uv.y += t;
 					float2 a = float2(_Scale, _LifeTime);
 					float2 grid = a * 2;
 					float2 id = floor(uv*grid);
@@ -143,6 +145,8 @@
 				fixed _MinBlur;
 				fixed _StaticDrop;
 				fixed _Alpha;
+				fixed _RainAmount;
+				fixed _T;
 
 				fixed4 frag(v2f_img i) : SV_Target
 				{
@@ -150,23 +154,14 @@
 					float2 uv = ((i.uv * _ScreenParams.xy) - _Position *_ScreenParams.xy) / _ScreenParams.y;
 					float2 UV = i.uv.xy;
 					
-					float3 M = float3(0.0, 0.0, 0.0);
-					float T = _Time.y + M.x*2.;
-
-					//#ifdef HAS_HEART
-					T = fmod(_Time.y, 102.);
-					T = lerp(T, M.x*102., M.z > 0. ? 1. : 0.);
-					//#endif
+					float T = _Time.y * _DropSpeed;
 
 					float t = T * .2;
 
-					float rainAmount = M.y;
-
-					float maxBlur = lerp(3., 6., rainAmount);
+					float maxBlur = lerp(3., 6., _RainAmount);
 					float minBlur = 2.;
 
 					float story = 0.;
-					float heart = 0.;
 
 					story = S(0., _FreezeTime, T);
 
@@ -178,15 +173,13 @@
 					minBlur = _MinBlur;		// more opaque glass towards the end
 					maxBlur = _MaxBlur;
 
-					rainAmount = _ScreenParams.xy;						// the rain is where the heart is
-
-					t *= .25;
+					t *= _T;
 
 					//UV = (UV - .5)*(.9 + _Zoom * .1) + .5;
 
-					float staticDrops = _StaticDrop;
-					float layer1 = _Layer1;
-					float layer2 = _Layer2;
+					float staticDrops = S(-.5, 1., _RainAmount) * _StaticDrop;
+					float layer1 = S(.25, .75, _RainAmount) * _Layer1;
+					float layer2 = S(.25, .75, _RainAmount) * _Layer2;
 
 
 					float2 c = Drops(uv, t, staticDrops, layer1, layer2);

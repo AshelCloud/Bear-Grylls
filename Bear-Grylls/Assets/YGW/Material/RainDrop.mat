@@ -66,16 +66,16 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DropSpeed: 0.75
+    - _DropSpeed: 1.1
     - _DstBlend: 0
     - _FocusA: 0.2
-    - _FocusB: 0.1
-    - _FreezeTime: 70
+    - _FocusB: 0.117
+    - _FreezeTime: 59
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Layer1: 1
-    - _Layer2: 1
+    - _Layer1: 0.51
+    - _Layer2: 0.27
     - _LifeTime: 1
     - _MaxBlur: 1
     - _Metallic: 0
@@ -84,11 +84,12 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Position: 0.5
-    - _Scale: 6
+    - _RainAmount: 1
+    - _Scale: 10
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StaticDrop: 0.5
+    - _StaticDrop: 0
     - _UVSec: 0
     - _ZWrite: 1
     - _Zoom: 0.5
