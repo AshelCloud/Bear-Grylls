@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace PSM
+{
+
+}
+
+
 public class ForCopy : MonoBehaviour
 {
-    #region Public
+    #region Variable
     #endregion
 
 
-    #region SerializeField
+    #region Function
     #endregion
 
-    #region Private
+    #region Coroutine
     #endregion
 
 
@@ -25,8 +31,5 @@ public class ForCopy : MonoBehaviour
     void Update()
     {
     }
-    #endregion
-
-    #region CallBack
     #endregion
 }
