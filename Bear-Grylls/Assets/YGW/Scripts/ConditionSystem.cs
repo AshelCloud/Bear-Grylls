@@ -113,10 +113,14 @@ namespace YGW
 
         private void Start()
         {
-            StartCoroutine(HygieneDecrease());
             StartCoroutine(ThirstIncrease());
             StartCoroutine(HungryIncrease());
             StartCoroutine(FatigueDecrease());
+            
+            if(gameObject.CompareTag("Animal")) { return; }
+
+            //Only Human
+            StartCoroutine(HygieneDecrease());
         }
 
         private void Update()
@@ -138,13 +142,7 @@ namespace YGW
 
             if(fatigue >= 100f) { strain = true; }
             else { strain = false; }
-
-            if (disease)
-            {
-                Debug.Log("Disease");
-                //TO DO
-            }
-
+            
             if(dehydration)
             {
                 Debug.Log("Dehydration");
@@ -163,15 +161,24 @@ namespace YGW
                 //TO DO
             }
 
-            if (cold)
-            {
-                Debug.Log("Cold");
-                //TO DO
-            }
-
             if (strain)
             {
                 Debug.Log("Strain");
+                //TO DO
+            }
+
+            if(gameObject.CompareTag("Animal")) { return; }
+
+            //Only human
+            if (disease)
+            {
+                Debug.Log("Disease");
+                //TO DO
+            }
+
+            if (cold)
+            {
+                Debug.Log("Cold");
                 //TO DO
             }
         }
