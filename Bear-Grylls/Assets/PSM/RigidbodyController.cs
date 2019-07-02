@@ -15,11 +15,12 @@ namespace PSM
             get { return rigidbody.velocity; }
         }
         public float stopPower = 1;
+        public float maxSpeed = 3;
 
 
         [SerializeField] Rigidbody rigidbody = null;
         [SerializeField] bool useDrag = true;
-
+        [SerializeField] bool useMaxSpeed;
 
         private bool useMove = false;
         #endregion
@@ -67,6 +68,11 @@ namespace PSM
                 rigidbody.velocity = stopVector;
             }
             useMove = false;
+        }
+        private void ClampVelocity()
+        {
+            if(maxSpeed < rigidbody.velocity.magnitude)
+                rigidbody.velocity = Vector3.ClampMagnitude(rigidbody.velocity, maxSpeed);
         }
         #endregion
 
