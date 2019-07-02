@@ -10,17 +10,22 @@ namespace PSM
     public class RigidbodyController : MonoBehaviour
     {
         #region Variable
-        public Vector3 velocity
-        {
-            get { return rigidbody.velocity; }
-        }
-        public float stopPower = 1;
-        public float maxSpeed = 3;
+        public Vector3 velocity { get { return rigidbody.velocity; } }
 
 
         [SerializeField] Rigidbody rigidbody = null;
-        [SerializeField] bool useDrag = true;
-        [SerializeField] bool useMaxSpeed;
+
+
+        [Header("Drag")]
+        public bool useDrag = true;
+        [ConditionalHide("useDrag", true)]
+        public float stopPower = 1;
+
+        [Header("MaxSpeed")]
+        public bool useMaxSpeed;
+        [ConditionalHide("useMaxSpeed", true)]
+        public float maxSpeed = 3;
+
 
         private bool useMove = false;
         #endregion
@@ -71,8 +76,16 @@ namespace PSM
         }
         private void ClampVelocity()
         {
-            if(maxSpeed < rigidbody.velocity.magnitude)
-                rigidbody.velocity = Vector3.ClampMagnitude(rigidbody.velocity, maxSpeed);
+            Vector3 velocityXZ = rigidbody.velocity;
+            velocityXZ.y = 0;
+            
+            if (maxSpeed < velocityXZ.magnitude)
+            {
+                velocityXZ = Vector3.ClampMagnitude(velocityXZ, maxSpeed);
+
+                velocityXZ.y = rigidbody.velocity.y;
+                rigidbody.velocity = velocityXZ;
+            }
         }
         #endregion
 
@@ -86,6 +99,7 @@ namespace PSM
         private void FixedUpdate()
         {
             if (useDrag) Drag();
+            if (useMaxSpeed) ClampVelocity();
         }
         #endregion
     }
