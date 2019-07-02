@@ -19,7 +19,13 @@ namespace PSM
         [Header("Drag")]
         public bool useDrag = true;
         [ConditionalHide("useDrag", true)]
-        public float stopPower = 1;
+        [SerializeField]
+        private float _stopPower = 1;
+        public float stopPower
+        {
+            get { return _stopPower;}
+            set { _stopPower = value; }
+        }
 
         [Header("MaxSpeed")]
         public bool useMaxSpeed;
