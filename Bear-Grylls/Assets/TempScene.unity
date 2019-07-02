@@ -384,10 +384,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 847641281}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3cf25d600db7b148892d3b2d3e99e57, type: 3}
+  m_Script: {fileID: 11500000, guid: d59504a774be4e24ca25f56250d3200f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  _hygiene: 100
+  _thirst: 0
+  _temperature: 0
+  _hungry: 0
+  _coldness: 0
+  _fatigue: 0
+  _disease: 0
+  _dehydration: 0
+  _fever: 0
+  _malnutrition: 0
+  _cold: 0
+  _strain: 0
 --- !u!65 &847641283
 BoxCollider:
   m_ObjectHideFlags: 0

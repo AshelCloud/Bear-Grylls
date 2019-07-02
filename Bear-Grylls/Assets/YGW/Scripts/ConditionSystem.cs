@@ -5,7 +5,7 @@ namespace YGW
 {
     public class ConditionSystem : MonoBehaviour
     {
-        #region Conditions Variable
+        #region Variable
         [Range(0f, 100f)]
         [SerializeField]
         private float _hygiene = 100f;
@@ -110,7 +110,7 @@ namespace YGW
 
         #endregion
 
-
+        #region MonoEvent
         private void Start()
         {
             StartCoroutine(ThirstIncrease());
@@ -182,6 +182,10 @@ namespace YGW
                 //TO DO
             }
         }
+        #endregion
+
+        #region Function
+        #endregion
 
         #region Coroutine
         private IEnumerator HygieneDecrease()
