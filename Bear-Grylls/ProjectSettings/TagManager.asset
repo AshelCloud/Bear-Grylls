@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Fly
+  - Weather
+  - Water
+  - Animal
   layers:
   - Default
   - TransparentFX
@@ -13,6 +17,7 @@ TagManager:
   - UI
   - 
   - 
+  - PostProcessing
   - 
   - 
   - 
@@ -24,8 +29,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Animal
   - 
   - 
   - 

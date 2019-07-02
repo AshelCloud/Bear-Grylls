@@ -12,7 +12,11 @@ The following packages were updated:
   com.unity.textmeshpro from version 1.3.0 to 2.0.1
   com.unity.timeline from version 0.0.0-builtin to 1.0.0
 
+<<<<<<< HEAD
 === Tue Jul  2 19:45:42 2019
+=======
+=== Tue Jul  2 19:05:13 2019
+>>>>>>> YGW
 
 Packages were changed.
 Update Mode: updateDependencies
