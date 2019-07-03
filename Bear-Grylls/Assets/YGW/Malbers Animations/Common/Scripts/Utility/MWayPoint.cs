@@ -6,8 +6,6 @@ using UnityEngine.Events;
 
 namespace MalbersAnimations.Utilities
 {
-    
-
     public class MWayPoint : MonoBehaviour, IWayPoint
     {
         public static List<MWayPoint> WayPoints;

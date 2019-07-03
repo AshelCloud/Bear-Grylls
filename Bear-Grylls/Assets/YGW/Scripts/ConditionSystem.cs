@@ -113,14 +113,10 @@ namespace YGW
         #region MonoEvent
         private void Start()
         {
+            StartCoroutine(HygieneDecrease());
             StartCoroutine(ThirstIncrease());
             StartCoroutine(HungryIncrease());
             StartCoroutine(FatigueDecrease());
-            
-            if(gameObject.CompareTag("Animal")) { return; } // Check Animal
-
-            //Only Human
-            StartCoroutine(HygieneDecrease());
         }
 
         private void Update()
@@ -142,45 +138,6 @@ namespace YGW
 
             if(fatigue >= 100f) { strain = true; }
             else { strain = false; }
-            
-            if(dehydration == true)
-            {
-                Debug.Log("Dehydration");
-                //TO DO
-            }
-
-            if (fever == true)
-            {
-                Debug.Log("Fever");
-                //TO DO
-            }
-
-            if (malnutrition == true)
-            {
-                Debug.Log("Malnutrition");
-                //TO DO
-            }
-
-            if (strain == true)
-            {
-                Debug.Log("Strain");
-                //TO DO
-            }
-
-            if(gameObject.CompareTag("Animal")) { return; } //Check Animal
-
-            //Only human
-            if (disease == true)
-            {
-                Debug.Log("Disease");
-                //TO DO
-            }
-
-            if (cold == true)
-            {
-                Debug.Log("Cold");
-                //TO DO
-            }
         }
         #endregion
 

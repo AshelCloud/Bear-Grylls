@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MalbersAnimations;
 
 namespace PSM
 {
     [RequireComponent(typeof(RigidbodyController))]
-    public class RigidbodyControllerPlayerMove : MonoBehaviour
+    public class RigidbodyControllerPlayerMove : MonoBehaviour, ICharacterMove
     {
         #region Variable
         [Header("Speed")]
@@ -18,7 +19,12 @@ namespace PSM
 
 
         #region Function
-        public void Move()
+        public void Move(Vector3 move, bool direction = true)
+        {
+            controller.AddForce(moveVec);
+        }
+
+        public void MoveInput()
         {
             moveVec = Vector3.zero;
             if (Input.GetKey(KeyCode.W))
@@ -32,9 +38,8 @@ namespace PSM
                 moveVec.x += speed;
 
             if (moveVec != Vector3.zero)
-                controller.AddForce(moveVec);
+                Move(moveVec);
         }
-
         #endregion
 
         #region MonoEvents
@@ -45,7 +50,7 @@ namespace PSM
         }
         void Update()
         {
-            Move();
+            MoveInput();
         }
         #endregion
     }
