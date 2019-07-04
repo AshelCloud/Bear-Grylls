@@ -6,58 +6,66 @@ namespace YGW
     public class ConditionSystem : MonoBehaviour
     {
         #region Variable
+        [SerializeField]
+        private bool isHuman = false;
+        public bool IsHuman 
+        {
+            get { return isHuman; }
+            set { isHuman = value; }
+        }
+        
         [Range(0f, 100f)]
         [SerializeField]
-        private float _hygiene = 100f;
-        public float hygiene
+        private float hygiene = 100f;
+        public float Hygiene
         {
-            get { return _hygiene; }
-            private set { _hygiene = value; }
+            get { return hygiene; }
+            private set { hygiene = value; }
         }
 
         [Range(0f, 100f)]
         [SerializeField]
-        private float _thirst = 0f;
-        public float thirst
+        private float thirst = 0f;
+        public float Thirst
         {
-            get { return _thirst; }
-            private set { _thirst = value; }
+            get { return thirst; }
+            private set { thirst = value; }
         }
 
         [Range(0f, 100f)]
         [SerializeField]
-        public float _temperature = 0f;
-        public float temperature
+        public float temperature = 0f;
+        public float Temperature
         {
-            get { return _temperature; }
-            private set { _temperature = value; }
+            get { return temperature; }
+            private set { temperature = value; }
         }
 
         [Range(0f, 100f)]
         [SerializeField]
-        public float _hungry = 0f;
-        public float hungry
+        public float hungry = 0f;
+        public float Hungry
         {
-            get { return _hungry; }
-            private set { _hungry = value; }
+            get { return hungry; }
+            private set { hungry = value; }
         }
 
         [Range(0f, 100f)]
         [SerializeField]
-        public float _coldness = 0f;
-        public float coldness
+        public float coldness = 0f;
+        public float Coldness
         {
-            get { return _coldness; }
-            private set { _coldness = value; }
+            get { return coldness; }
+            private set { coldness = value; }
         }
 
         [Range(0f, 100f)]
         [SerializeField]
-        public float _fatigue = 0f;
-        public float fatigue
+        public float fatigue = 0f;
+        public float Fatigue
         {
-            get { return _fatigue; }
-            private set { _fatigue = value; }
+            get { return fatigue; }
+            private set { fatigue = value; }
         }
 
         [SerializeField]

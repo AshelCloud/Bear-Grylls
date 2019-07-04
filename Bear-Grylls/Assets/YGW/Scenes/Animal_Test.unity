@@ -698,12 +698,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1777137185}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c84f6a889d6b64e4ba220fc0f73d2885, type: 3}
+  m_Script: {fileID: 11500000, guid: f648a21851a972548b9327fa0ab0d4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AutoSpeed: 1
   ToTrot: 6
   ToRun: 8
+  stoppingDistance: 0.6
+  OnTargetPositionArrived:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MalbersAnimations.Events.Vector3Event, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnTargetArrived:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MalbersAnimations.Events.TransformEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   OnActionStart:
     m_PersistentCalls:
       m_Calls: []

@@ -56,6 +56,25 @@ namespace MalbersAnimations.Utilities
             get { return direction; }
         }
 
+        //Custom
+        [Header("Custom")]
+        [SerializeField]
+        private float viewDistance = 1f;
+        public float ViewDistance 
+        {
+            get
+            {
+                return viewDistance;
+            }
+            set
+            {
+                viewDistance = value;
+            }
+        }
+
+        public LayerMask targetMask;
+        public LayerMask viewMask;
+
         /// <summary>
         /// Check if is on the Angle of Aiming
         /// </summary>
@@ -105,6 +124,10 @@ namespace MalbersAnimations.Utilities
             }
         }
 
+        void Update()
+        {
+            FindTargets();
+        }
 
         void LateUpdate()
         {
@@ -172,10 +195,10 @@ namespace MalbersAnimations.Utilities
                 if (currentSmoothness == 0) return;                                         //Skip all next stuffs
 
 
-                if (debug && i == Bones.Length - 1)
-                {
-                    Debug.DrawRay(bone.bone.position, Direction * 15, Color.green);
-                }
+                //if (debug && i == Bones.Length - 1)
+                //{
+                //    Debug.DrawRay(bone.bone.position, Direction * 15, Color.green);
+                //}
 
 
                 var final = Quaternion.LookRotation(Direction, UpVector) * Quaternion.Euler(bone.offset);
@@ -184,6 +207,37 @@ namespace MalbersAnimations.Utilities
             }
         }
 
+        private void FindTargets()
+        {
+            //시야거리 내에 존재하는 모든 컬라이더 받아오기
+            Collider[] targets = Physics.OverlapSphere(transform.position, ViewDistance, targetMask);
+
+            if(targets.Length <= 0)
+            {
+                NoTarget();
+            }
+
+            for (int i = 0; i < targets.Length; i++)
+            {
+                Transform target = targets[i].transform;
+                //탱크로부터 타겟까지의 단위벡터
+                Vector3 dirToTarget = (target.position - transform.position).normalized;
+
+                //_transform.forward와 dirToTarget은 모두 단위벡터이므로 내적값은 두 벡터가 이루는 각의 Cos값과 같다.
+                //내적값이 시야각/2의 Cos값보다 크면 시야에 들어온 것이다.
+                //if (Vector3.Angle(_transform.forward, dirToTarget) < ViewAngle/2)
+                if (Vector3.Dot(transform.forward, dirToTarget) > Mathf.Cos((LimitAngle / 2) * Mathf.Deg2Rad))
+                {
+                    float distToTarget = Vector3.Distance(transform.position, target.position);
+
+                    if (Physics.Raycast(transform.position, dirToTarget, distToTarget, viewMask))
+                    {
+                        Debug.DrawLine(transform.position, target.position, Color.red);
+                        Target = target;
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// Set the Target to Null
@@ -216,9 +270,9 @@ namespace MalbersAnimations.Utilities
                 Transform Center = Bones != null && Bones.Length>0 && Bones[Bones.Length - 1] != null ? Bones[Bones.Length - 1].bone : null;
                 if (Center != null)
                 {
-                    UnityEditor.Handles.DrawSolidArc(Center.position, Vector3.up, Quaternion.Euler(0, -LimitAngle, 0) * transform.forward, LimitAngle * 2, 1);
+                    UnityEditor.Handles.DrawSolidArc(Center.position, Vector3.up, Quaternion.Euler(0, -LimitAngle, 0) * transform.forward, LimitAngle * 2, viewDistance);
                     UnityEditor.Handles.color = Color.green;
-                    UnityEditor.Handles.DrawWireArc(Center.position, Vector3.up, Quaternion.Euler(0, -LimitAngle, 0) * transform.forward, LimitAngle * 2, 1);
+                    UnityEditor.Handles.DrawWireArc(Center.position, Vector3.up, Quaternion.Euler(0, -LimitAngle, 0) * transform.forward, LimitAngle * 2, viewDistance);
                 }
             }
 
