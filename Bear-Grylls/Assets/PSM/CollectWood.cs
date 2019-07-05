@@ -8,17 +8,21 @@ namespace PSM
     {
         protected override void Init()
         {
-            throw new System.NotImplementedException();
+
         }
 
         protected override void Process()
         {
-            throw new System.NotImplementedException();
+
         }
 
         protected override bool CollectCondition()
         {
-            throw new System.NotImplementedException();
+            if(Input.GetKeyDown(KeyCode.F))
+                return true;
+
+
+            return false;
         }
     }
 }

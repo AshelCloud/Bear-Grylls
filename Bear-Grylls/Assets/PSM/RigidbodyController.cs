@@ -12,7 +12,8 @@ namespace PSM
         #region Variable
         public Vector3 velocity { get { return rigidbody.velocity; } }
 
-
+        [SerializeField] private bool editComponentField = false;
+        [ConditionalHide("editComponentField", true)]
         [SerializeField] Rigidbody rigidbody = null;
 
 
