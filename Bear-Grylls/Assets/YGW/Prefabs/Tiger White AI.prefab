@@ -10479,6 +10479,7 @@ GameObject:
   - component: {fileID: 7488155690996566596}
   - component: {fileID: 7487437573596001310}
   - component: {fileID: 7385408002163578314}
+  - component: {fileID: 1235280500441703}
   m_Layer: 20
   m_Name: Tiger White AI
   m_TagString: Player
@@ -10505,7 +10506,6 @@ Transform:
   - {fileID: 7380889664751895026}
   - {fileID: 7381234417739541244}
   - {fileID: 7381933572776478676}
-  - {fileID: 7385408002729627862}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10834,6 +10834,13 @@ MonoBehaviour:
     offset: {x: 0, y: -90, z: -90}
     weight: 1
   debug: 1
+  viewDistance: 14.71
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 512
+  viewMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &7487437573596001310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10898,6 +10905,31 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1235280500441703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7384317934002774414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59504a774be4e24ca25f56250d3200f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHuman: 0
+  hygiene: 100
+  thirst: 0
+  temperature: 0
+  hungry: 0
+  coldness: 0
+  fatigue: 0
+  _disease: 0
+  _dehydration: 0
+  _fever: 0
+  _malnutrition: 0
+  _cold: 0
+  _strain: 0
 --- !u!1 &7384321405317666654
 GameObject:
   m_ObjectHideFlags: 0
@@ -11882,86 +11914,3 @@ Transform:
   m_Father: {fileID: 7381101468660929150}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7385408002729627859
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7385408002729627862}
-  - component: {fileID: 7385408002729627861}
-  - component: {fileID: 7385408002729627860}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7385408002729627862
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7385408002729627859}
-  m_LocalRotation: {x: -0.009248991, y: -0.94776046, z: 0.3176555, w: -0.02755928}
-  m_LocalPosition: {x: 0.0118255615, y: 2.7242231, z: 4.497921}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7381865160663641178}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &7385408002729627861
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7385408002729627859}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!81 &7385408002729627860
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7385408002729627859}
-  m_Enabled: 1

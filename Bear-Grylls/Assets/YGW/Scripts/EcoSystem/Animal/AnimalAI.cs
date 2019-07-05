@@ -102,19 +102,6 @@ namespace YGW
             }
         }
 
-        private Terrain map;
-        private Terrain Map
-        {
-            get
-            {
-                if (map == null)
-                {
-                    map = GameObject.Find("Map").GetComponent<Terrain>();
-                }
-                return map;
-            }
-        }
-
         protected ConditionSystem condition;
         public ConditionSystem Condition
         {
@@ -168,7 +155,7 @@ namespace YGW
             Agent.updatePosition = false;
             DefaultStopDistance = StoppingDistance;                             //Store the Started Stopping Distance
             Agent.stoppingDistance = StoppingDistance;
-            SetDestination(GetRandomPosition());
+            SetDestination(EcoManager.GetRandomPosition());
 
             //SetTarget(Target);                                                  //Set the first Target
             IsWaiting = false;
@@ -366,7 +353,7 @@ namespace YGW
                 targetPosition = NullVector;                            //Reset the TargetPosition
                 Agent.isStopped = true;                                 //Stop the Agent
 
-                SetNextTarget(Random.Range(0f, 10f), GetRandomPosition());
+                SetNextTarget(Random.Range(0f, 10f), EcoManager.GetRandomPosition());
             }
 
             animal.Move(Direction);                                     //Set the Movement to the Animal
@@ -467,28 +454,6 @@ namespace YGW
             if (animal) animal.Stop();
             IsWaiting = false;
             Stopped = true;
-        }
-
-        protected Vector3 GetRandomPosition()
-        {
-            RaycastHit hit;
-
-            Vector3 scale = Map.transform.lossyScale;
-
-            Vector3 pos = new Vector3(Random.Range(Map.transform.position.x, Map.transform.position.x + Map.terrainData.size.x), 10000f, Random.Range(map.transform.position.z, map.transform.position.z + Map.terrainData.size.z));
-
-            Ray ray = new Ray(pos, Vector3.down);
-
-            if (Physics.Raycast(ray, out hit, float.MaxValue))
-            {
-                pos.y = hit.point.y;
-            }
-            else
-            {
-                pos.y = Random.Range(Map.transform.position.y, Map.transform.position.y + Map.terrainData.size.y);
-            }
-
-            return pos;
         }
         #endregion
 

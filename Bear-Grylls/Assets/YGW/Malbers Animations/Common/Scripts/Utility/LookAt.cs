@@ -219,7 +219,22 @@ namespace MalbersAnimations.Utilities
 
             for (int i = 0; i < targets.Length; i++)
             {
+                bool isMyBody = false;
                 Transform target = targets[i].transform;
+
+                for(int j = 0; j < Bones.Length; j++)
+                {
+                    if(target == Bones[j].bone)
+                    {
+                        isMyBody = true;
+                    }
+                }
+
+                if(isMyBody)
+                {
+                    continue;
+                }
+
                 //탱크로부터 타겟까지의 단위벡터
                 Vector3 dirToTarget = (target.position - transform.position).normalized;
 

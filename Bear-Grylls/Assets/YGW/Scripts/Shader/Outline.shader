@@ -31,6 +31,7 @@
 		v.vertex.xyz *= _OutlineWidth;
 
 		v2f o;
+		UNITY_INITIALIZE_OUTPUT(v2f, o);
 		o.pos = UnityObjectToClipPos(v.vertex);
 
 		return o;
