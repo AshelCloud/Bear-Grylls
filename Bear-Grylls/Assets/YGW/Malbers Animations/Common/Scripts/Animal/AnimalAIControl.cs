@@ -186,7 +186,6 @@ namespace MalbersAnimations
         {
             if (isFlyingOffMesh) return;
 
-
             if (Stopped)
             {
                 if (TargetisMoving)
