@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MalbersAnimations;
 
 namespace PSM
 {
@@ -20,7 +21,12 @@ namespace PSM
 
 
         #region Function
-        public void Move()
+        public void Move(Vector3 move, bool direction = true)
+        {
+            controller.AddForce(moveVec);
+        }
+
+        public void MoveInput()
         {
             moveVec = Vector3.zero;
             if (Input.GetKey(KeyCode.W))
@@ -64,7 +70,7 @@ namespace PSM
         }
         void Update()
         {
-            Move();
+            MoveInput();
         }
         #endregion
     }
