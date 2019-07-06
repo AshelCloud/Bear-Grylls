@@ -51,7 +51,6 @@ namespace PSM
                     SetOutLine(each, true);
                 else
                     SetOutLine(each, false);
-
             }
         }
         private void SetOutLine(GameObject gameObj, bool enableValue)

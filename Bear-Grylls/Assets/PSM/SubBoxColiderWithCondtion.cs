@@ -8,6 +8,7 @@ namespace PSM
     [RequireComponent(typeof(BoxCollider))]
     public abstract class SubBoxColiderWithCondtion : SubColliderWithCondition
     {
+        #region Function - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         protected abstract bool OnTriggerEnterCondition(Collider other);
         protected abstract bool OnTriggerStayCondition(Collider other);
         protected abstract bool OnTriggerExitCondition(Collider other);
@@ -43,6 +44,7 @@ namespace PSM
         {
             return OnCollisionExitCondition(collision); ;
         }
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     }
 }
 

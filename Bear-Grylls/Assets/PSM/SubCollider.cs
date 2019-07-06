@@ -17,14 +17,14 @@ namespace PSM
 
     public abstract class SubCollider : MonoBehaviour
     {
-        #region Variable
+        #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         public Component usingComponent;
         public bool use = true;
 
         protected UsingSubColliderComponent usingSubColliderComponent;
-        #endregion
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        #region MonoEvents
+        #region MonoEvents - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         protected virtual void Awake()
         {
             if (usingComponent is UsingSubColliderComponent)
@@ -77,6 +77,6 @@ namespace PSM
 
             usingSubColliderComponent.SubOnCollisionExit(collision);
         }
-        #endregion
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     }
 }

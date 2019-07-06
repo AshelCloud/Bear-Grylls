@@ -7,7 +7,7 @@ namespace PSM
     public abstract class SubColliderWithCondition : SubCollider
     {
 
-        #region Function
+        #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         protected abstract bool OnTriggerEnterCondition_(Collider other);
         protected abstract bool OnTriggerStayCondition_(Collider other);
         protected abstract bool OnTriggerExitCondition_(Collider other);
@@ -15,9 +15,10 @@ namespace PSM
         protected abstract bool OnCollisionEnterCondition_(Collision collision);
         protected abstract bool OnCollisionStayCondition_(Collision collision);
         protected abstract bool OnCollisionExitCondition_(Collision collision);
-        #endregion
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        #region MonoEvents
+
+        #region MonoEvents - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         protected override void OnTriggerEnter(Collider other)
         {
             if (OnTriggerEnterCondition_(other) == true)
@@ -50,6 +51,6 @@ namespace PSM
             if (OnCollisionExitCondition_(collision) == true)
                 base.OnCollisionExit(collision);
         }
-        #endregion
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     }
 }

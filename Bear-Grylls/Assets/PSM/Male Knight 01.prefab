@@ -2802,16 +2802,17 @@ GameObject:
   - component: {fileID: 423364561022526599}
   - component: {fileID: 338260607387079437}
   - component: {fileID: 339222146972260162}
-  - component: {fileID: -2202006471425412157}
+  - component: {fileID: 4330320628880684609}
   - component: {fileID: 338260607387079443}
+  - component: {fileID: -2202006471425412157}
   - component: {fileID: 338260607387079442}
   - component: {fileID: 338260607387079440}
   - component: {fileID: 7806116406323996797}
   - component: {fileID: 339222146972260157}
-  - component: {fileID: 3462526485007380665}
-  - component: {fileID: 1987277301071127911}
   - component: {fileID: 1642918590865419676}
+  - component: {fileID: 3462526485007380665}
   - component: {fileID: 5711880932959235192}
+  - component: {fileID: 3855387971489105719}
   m_Layer: 0
   m_Name: Male Knight 01
   m_TagString: Untagged
@@ -2939,7 +2940,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6201362, y: 1.8135444, z: 0.39298415}
   m_Center: {x: -0.008257896, y: 0.90473074, z: 0.021373868}
---- !u!114 &-2202006471425412157
+--- !u!114 &4330320628880684609
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2965,6 +2966,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   editComponentField: 0
   animator: {fileID: 0}
+--- !u!114 &-2202006471425412157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339222146972260163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0fefbe16717fe4b9732448b668b610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &338260607387079442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3026,35 +3039,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: 3
   modelAngle: 0
---- !u!114 &3462526485007380665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 339222146972260163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dd7a34f51bc3824aba6956b58af5aa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1987277301071127911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 339222146972260163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a546381049a9add458f2951289ad33b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  editComponentField: 1
-  inventory: {fileID: 0}
-  timeToCollect: 2
-  animatorSetupAtStartOfCollect: []
-  animatorSetupAtExitOfCollect: []
 --- !u!114 &1642918590865419676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3065,6 +3049,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a0fefbe16717fe4b9732448b668b610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3462526485007380665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339222146972260163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dd7a34f51bc3824aba6956b58af5aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &5711880932959235192
@@ -3079,6 +3075,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea06a0106534e3d4c8b65ddb8ed1800b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tagsOfSelectObject: []
+--- !u!114 &3855387971489105719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339222146972260163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a546381049a9add458f2951289ad33b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationPlaybackTimeLimit: 4
+  animatorVarialbeSetupAtStart:
+  - asd,int,123
+  animatorVarialbeSetupAtEnd:
+  - asd,int,0
+  editCollectSomethingComponentField: 1
+  selector: {fileID: 0}
+  inventory: {fileID: 0}
+  collectName: COLLECT_WOOD
+  tagsOfObjectToCollect:
+  - Item
 --- !u!1 &339222550386217347
 GameObject:
   m_ObjectHideFlags: 0

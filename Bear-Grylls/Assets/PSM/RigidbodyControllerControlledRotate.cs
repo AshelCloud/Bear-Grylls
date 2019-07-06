@@ -9,17 +9,17 @@ namespace PSM
     [RequireComponent(typeof(RigidbodyController))]
     public class RigidbodyControllerControlledRotate : MonoBehaviour
     {
-        #region Variable
+        #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         public float turnSpeed = 3;
 
         [Header("모델이 transform.rotation.y 값이 0 일 때 왼손좌표계에서 어느 각도를 바라보고 있습니까?")]
         [SerializeField] private float modelAngle;
 
         private RigidbodyController controller;
-        #endregion
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-        #region Function
+        #region Function - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         private void Rotate()
         {
             //rigidbody 이동속도 기반
@@ -45,11 +45,10 @@ namespace PSM
             transform.rotation = Quaternion.Lerp(transform.rotation, AngleToReplace, turnSpeed * Time.deltaTime);
 
         }
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-        #endregion
-
-        #region MonoEvents
+        #region MonoEvents - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         void Awake()
         {
             controller = GetComponent<RigidbodyController>();
@@ -58,7 +57,8 @@ namespace PSM
         {
             Rotate();
         }
-        #endregion
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     }
 }
 
