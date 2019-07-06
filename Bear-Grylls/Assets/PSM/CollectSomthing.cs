@@ -108,10 +108,6 @@ namespace PSM
     public abstract class CollectSomthing : MonoBehaviour, UsingAnimatorManagerComponent
     {
         #region Variable
-        [SerializeField] protected bool editComponentField = false;
-        [ConditionalHide("editComponentField", true)]
-        [SerializeField] protected Inventory inventory;
-
         [Header("애니메이션 설정")]
         [SerializeField] protected float timeToCollect = 2f;
         [Header("수집 시작 시 Animator 변수 설정 / \"애니메이터변수이름,자료형,값\" 형식으로 입력합니다   ")]
@@ -119,6 +115,12 @@ namespace PSM
 
         [Header("수집 종료 시 Animator 변수 설정 / \"애니메이터변수이름,자료형,값\" 형식으로 입력합니다   ")]
         [SerializeField] private string[] animatorSetupAtExitOfCollect;
+
+        [SerializeField] protected bool editComponentField = false;
+        [ConditionalHide("editComponentField", true)]
+        [SerializeField] protected Inventory inventory;
+
+        private Transform collectTarget = null;
 
         private ParameterParserWithUnityCustomUtility animatorSetupUtilityAtStartOfCollect;
         private ParameterParserWithUnityCustomUtility animatorSetupUtilityAtEndOfCollect;
@@ -170,8 +172,12 @@ namespace PSM
         /// <returns> True반환시 아이템 수집을 시작 </returns>
         protected abstract bool CollectCondition();
 
+        protected abstract Transform SetCollectTarget();
+
         private void UpdateCollect()
         {
+            collectTarget = SetCollectTarget();
+
             if (CollectCondition() == false)
                 return;
 
@@ -186,7 +192,17 @@ namespace PSM
         {
             crRunning = true;
 
+            //정지
+            Rigidbody rigidbody = GetComponent<Rigidbody>();
+            if (rigidbody != null)
+                rigidbody.velocity = Vector3.zero;
+
+
             //수집애니메이션 재생
+            Vector3 collectTargetPos = collectTarget.transform.position;
+            collectTargetPos.y = transform.position.y;
+            transform.LookAt(collectTargetPos);
+
             animationSwitchAtStartOfCollect = true;
 
             bool success = false;//sucess = true 일 경우 후에 인벤토리에 수집한 아이템을 넣을지 말지 판단함
