@@ -9,7 +9,7 @@ namespace PSM
     [RequireComponent(typeof(AnimatorManager))]
     public class RigidbodyControllerControlledMove : MonoBehaviour, UsingAnimatorManagerComponent
     {
-        #region Variable
+        #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         public float speed;
 
 
@@ -17,10 +17,8 @@ namespace PSM
         private Vector3 moveVec = new Vector3();
         private bool isWalk = false;
 
-        #endregion
-
-
-        #region Function
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #region Function - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         public void Move(Vector3 move, bool direction = true)
         {
             controller.AddForce(moveVec);
@@ -60,9 +58,8 @@ namespace PSM
             animator.SetFloat("Speed", maxSpeed * rate);
 
         }
-        #endregion
-
-        #region MonoEvents
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #region MonoEvents - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         void Awake()
         {
             controller = GetComponent<RigidbodyController>();
@@ -72,7 +69,7 @@ namespace PSM
         {
             MoveInput();
         }
-        #endregion
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     }
 
 }

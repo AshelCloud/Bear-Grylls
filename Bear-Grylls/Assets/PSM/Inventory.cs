@@ -13,12 +13,10 @@ namespace PSM
 
     public class Inventory : MonoBehaviour
     {
-        #region Variable
+        #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         private List<InventoryItem> itemList = new List<InventoryItem>();
-        #endregion
-
-
-        #region Function
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #region Function - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         /// <summary>
         /// 인벤토리에 아이템을 넣습니다
         /// </summary>
@@ -37,7 +35,7 @@ namespace PSM
         {
             return null;
         }
-        #endregion
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     }
 }
 

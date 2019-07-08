@@ -8,7 +8,6 @@ namespace PSM
     /// AnimatorManager 컴포넌트가 있어야 작동합니다
     /// [RequireComponent(typeof(AnimatorManager))]  를 활용하세요
     /// </summary>
-
     public interface UsingAnimatorManagerComponent
     {
         /// <summary>
@@ -27,10 +26,12 @@ namespace PSM
 
     public class AnimatorManager : MonoBehaviour
     {
+        #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         [SerializeField] private bool editComponentField = false;
         [ConditionalHide("editComponentField", true)]
         [SerializeField] private Animator animator;
-
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #region Function - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         UsingAnimatorManagerComponent[] usingAnimatorComponents;
         private void Awake()
         {
@@ -47,6 +48,7 @@ namespace PSM
             for (int i = 0; i < usingAnimatorComponents.Length; ++i)
                 usingAnimatorComponents[i].UpdateAnimator(animator);
         }
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     }
 }
 

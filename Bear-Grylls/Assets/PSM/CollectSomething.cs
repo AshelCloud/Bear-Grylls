@@ -65,7 +65,6 @@ namespace PSM
 
             return false;
         }
-
         protected override void InterplaySuccessCode()
         {
             if (inventory.AddItem() == false)//무게 초과로 아이템 넣기 실패
@@ -73,6 +72,9 @@ namespace PSM
                 //아이템을 바닥에 떨어트림
                 print("Fail");
             }
+        }
+        protected override void InterplayFailCode()
+        {
         }
         #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         #region MonoEvents - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -7,17 +7,15 @@ namespace PSM
 {
     public class EntitySelector : MonoBehaviour, UsingSubColliderComponent
     {
-        #region Variable
+        #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         [SerializeField] string[] tagsOfSelectObject;
 
 
         public GameObject SelectedObject { get; private set; } = null;
 
         private List<GameObject> nearObjects = new List<GameObject>();
-        #endregion
-
-
-        #region Function
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #region Function - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         private void Update()
         {
             UpdateSelectedObject();
@@ -61,10 +59,8 @@ namespace PSM
 
             outLine.enabled = enableValue;
         }
-        #endregion
-
-
-        #region MonoEvents
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #region MonoEvents - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         public void SubColliderTriggerEnter(Collider other)
         {
             foreach (string tag in tagsOfSelectObject)
@@ -97,6 +93,6 @@ namespace PSM
         public void SubCollisionEnter(Collision collision) { }
         public void SubCollisionStay(Collision collision) { }
         public void SubOnCollisionExit(Collision collision) { }
-        #endregion
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     }
 }

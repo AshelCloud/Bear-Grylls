@@ -156,6 +156,7 @@ namespace PSM
         protected abstract bool InterplayActionCondition();// True반환시 상호작용 시작
         protected abstract bool InterplayCancelCondition();// True반환시 상호작용 취소
         protected abstract void InterplaySuccessCode();//상호작용 성공시 실행되는 코드
+        protected abstract void InterplayFailCode();//상호작용 성공시 실행되는 코드
 
         private void UpdateInterplayAction()
         {
@@ -220,9 +221,11 @@ namespace PSM
             //상호작용 애니메이션 종료
             animationSwitchAtEnd = true;
 
-            //상호작용 성공
+            //상호작용 결과
             if (success)
                 InterplaySuccessCode();
+            else
+                InterplayFailCode();
 
             yield return null;
             crRunning = false;

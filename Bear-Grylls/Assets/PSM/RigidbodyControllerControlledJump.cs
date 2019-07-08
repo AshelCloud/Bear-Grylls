@@ -7,7 +7,7 @@ namespace PSM
     [RequireComponent(typeof(RigidbodyController))]
     public class RigidbodyControllerControlledJump : MonoBehaviour
     {
-        #region Variable
+        #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         [Tooltip("하위 오브젝트의 JumpState 스크립트를 가져와야 합니다.")]
         [SerializeField] JumpState jumpState;
 
@@ -21,10 +21,8 @@ namespace PSM
         private RigidbodyController controller;
         private const float doubleJumpPreventionTime = 0.2f;
         private float doubleJumpPreventionNowTime = 0.2f;
-        #endregion
-
-
-        #region Function
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #region Function - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         public void Jump()
         {
             if(Input.GetKeyDown(jumpKey))
@@ -51,9 +49,8 @@ namespace PSM
                     jumpableCount = jumpableCountConstant;
             }
         }
-        #endregion
-
-        #region Coroutine
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #region Coroutine - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         private IEnumerator JumpRoutine()
         {
             controller.AddForce(new Vector3(0, jumpPower, 0));
@@ -69,10 +66,8 @@ namespace PSM
             doubleJumpPreventionNowTime = doubleJumpPreventionTime;
             yield return null;
         }
-        #endregion
-
-
-        #region MonoEvents
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #region MonoEvents - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         void Awake()
         {
             controller = GetComponent<RigidbodyController>();
@@ -83,7 +78,7 @@ namespace PSM
             UpdateJumpableCount();
             Jump();
         }
-        #endregion
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     }
 }
 
