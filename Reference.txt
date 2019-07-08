@@ -1,0 +1,2 @@
+#XML Âü°í
+http://gram.gs/gramlog/xml-serialization-and-deserialization-in-unity/
