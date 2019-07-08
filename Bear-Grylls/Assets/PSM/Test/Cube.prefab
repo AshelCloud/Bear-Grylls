@@ -13,8 +13,11 @@ GameObject:
   - component: {fileID: 2425796667871318370}
   - component: {fileID: 2425796667871318369}
   - component: {fileID: 2425796667871318368}
+  - component: {fileID: 5807164158296990226}
   - component: {fileID: 2425796667871318383}
   - component: {fileID: 2425796667871318373}
+  - component: {fileID: 2425796667688179403}
+  - component: {fileID: 2425796667688179404}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -112,6 +115,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &5807164158296990226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2425796667871318382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dd7a34f51bc3824aba6956b58af5aa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2425796667871318383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 0}
-  useDrag: 0
+  useDrag: 1
   _stopPower: 1
   useMaxSpeed: 0
   maxSpeed: 2
@@ -142,6 +157,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+--- !u!114 &2425796667688179403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2425796667871318382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c50a5ba9d10a04498011417624a1d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpState: {fileID: 2345797638460815070}
+  jumpKey: 32
+  jumpPower: 200
+  jumpableCount: 1
+--- !u!114 &2425796667688179404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2425796667871318382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a546381049a9add458f2951289ad33b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useComponentField: 0
+  inventory: {fileID: 0}
+  animator: {fileID: 0}
+  animationName: 
+  timeToCollect: 2
 --- !u!1 &7327408836835401886
 GameObject:
   m_ObjectHideFlags: 0

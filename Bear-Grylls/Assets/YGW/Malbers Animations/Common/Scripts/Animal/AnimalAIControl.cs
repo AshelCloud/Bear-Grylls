@@ -399,7 +399,6 @@ namespace MalbersAnimations
             CheckOffMeshLinks();                                        //Jump/Fall behaviour 
         }
 
-
         protected virtual void WakeAnimal()
         {
             animal.WakeAnimal();

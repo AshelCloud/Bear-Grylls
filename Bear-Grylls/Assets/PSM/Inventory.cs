@@ -13,15 +13,19 @@ namespace PSM
 
     public class Inventory : MonoBehaviour
     {
-        #region Variable
+        #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         private List<InventoryItem> itemList = new List<InventoryItem>();
-        #endregion
-
-
-        #region Function
-        public void AddItem()
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #region Function - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        /// <summary>
+        /// 인벤토리에 아이템을 넣습니다
+        /// </summary>
+        /// <returns> 성공시 True를 반환, 무게 초과시 아이템 넣길 거부하고 False를 반환 </returns>
+        public bool AddItem()
         {
+            print("success");
 
+            return true;
         }
         public void RemoveItem()
         {
@@ -31,7 +35,7 @@ namespace PSM
         {
             return null;
         }
-        #endregion
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     }
 }
 

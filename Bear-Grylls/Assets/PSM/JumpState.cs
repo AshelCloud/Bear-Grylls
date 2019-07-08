@@ -13,15 +13,14 @@ namespace PSM
     [RequireComponent(typeof(BoxCollider))]
     public class JumpState : MonoBehaviour
     {
-        #region Variable
+        #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         public bool use = true;
         public JUMP_STATE state { get; private set; } = JUMP_STATE.GROUND;
 
 
         private BoxCollider boxCollider = null;
-        #endregion
-
-        #region MonoEvents
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #region MonoEvents - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         private void Awake()
         {
             boxCollider = GetComponent<BoxCollider>();
@@ -41,7 +40,7 @@ namespace PSM
 
             state = JUMP_STATE.AIR;
         }
-        #endregion
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     }
 }
 
