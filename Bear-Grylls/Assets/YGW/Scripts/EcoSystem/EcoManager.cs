@@ -34,8 +34,11 @@ namespace YGW
             RaycastHit hit;
 
             Vector3 scale = Map.transform.lossyScale;
+            
+            Vector3 mapPos = Map.transform.position;
 
-            Vector3 pos = new Vector3(Random.Range(Map.transform.position.x, Map.transform.position.x + Map.terrainData.size.x), 10000f, Random.Range(map.transform.position.z, map.transform.position.z + Map.terrainData.size.z));
+            Vector3 pos = new Vector3(Random.Range(mapPos.x, mapPos.x + Map.terrainData.size.x),
+                                    10000f, Random.Range(mapPos.z, mapPos.z + Map.terrainData.size.z));
 
             Ray ray = new Ray(pos, Vector3.down);
 
