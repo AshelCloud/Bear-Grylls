@@ -9,10 +9,10 @@ namespace PSM
     [RequireComponent(typeof(Rigidbody))]
     public class RigidbodyController : MonoBehaviour
     {
-        #region Variable
+        #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         public Vector3 velocity { get { return rigidbody.velocity; } }
-
-
+        [SerializeField] private bool editComponentField = false;
+        [ConditionalHide("editComponentField", true)]
         [SerializeField] Rigidbody rigidbody = null;
 
 
@@ -34,10 +34,8 @@ namespace PSM
 
 
         private bool useMove = false;
-        #endregion
-
-
-        #region Function
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #region Function - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         public void AddForce(Vector3 force)
         {
             useMove = true;
@@ -93,10 +91,8 @@ namespace PSM
                 rigidbody.velocity = velocityXZ;
             }
         }
-        #endregion
-
-
-        #region MonoEvents
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #region MonoEvents - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         private void Awake()
         {
             if (rigidbody == null) rigidbody = GetComponent<Rigidbody>();
@@ -107,7 +103,7 @@ namespace PSM
             if (useDrag) Drag();
             if (useMaxSpeed) ClampVelocity();
         }
-        #endregion
+        #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     }
 
 }

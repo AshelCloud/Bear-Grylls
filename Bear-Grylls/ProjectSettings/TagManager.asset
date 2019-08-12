@@ -8,6 +8,7 @@ TagManager:
   - Weather
   - Water
   - Animal
+  - Item
   layers:
   - Default
   - TransparentFX
