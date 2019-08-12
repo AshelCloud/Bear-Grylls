@@ -90,7 +90,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _StaticDrop: 0
-    - _T: 0.25
+    - _T: 0.231
     - _UVSec: 0
     - _ZWrite: 1
     - _Zoom: 0.5
