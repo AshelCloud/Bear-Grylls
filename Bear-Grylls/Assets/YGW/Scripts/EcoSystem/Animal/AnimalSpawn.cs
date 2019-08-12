@@ -4,11 +4,14 @@ using UnityEngine;
 
 namespace YGW
 {
-    public class AnimalSpawn<T> : MonoBehaviour
+    public class AnimalSpawn<T> : MonoBehaviour where T : MonoBehaviour
     {
         #region Variable
         [SerializeField]
         protected GameObject animal;
+
+        [SerializeField]
+        protected List<GameObject> animals;
 
         [Range(0, 100)]
         [SerializeField]
@@ -65,7 +68,7 @@ namespace YGW
             CurAnimalCount = GetComponentsInChildren<T>().Length;
         }
 
-        private void Update()
+        protected void Update()
         {
             if (LimitAnimalCount < CurAnimalCount)
             {
@@ -105,7 +108,9 @@ namespace YGW
         {
             while (CurAnimalCount < LimitAnimalCount)
             {
-                Instantiate(animal, EcoManager.GetRandomPosition(), Quaternion.identity, transform);
+                var ani = Instantiate(animal, EcoManager.Instance.GetRandomPosition(), Quaternion.identity, transform);
+
+                animals.Add(ani);
 
                 yield return new WaitForFixedUpdate();
             }
@@ -117,9 +122,10 @@ namespace YGW
         {
             while (LimitAnimalCount < CurAnimalCount)
             {
-                var animals = GetComponentsInChildren<T>() as Component[];
+                var anis = GetComponentsInChildren<T>() as Component[];
                 
-                Destroy(animals[CurAnimalCount - 1].gameObject);
+                animals.Remove(anis[CurAnimalCount - 1].gameObject);
+                Destroy(anis[CurAnimalCount - 1].gameObject);
 
                 yield return new WaitForFixedUpdate();
             }

@@ -155,7 +155,7 @@ namespace YGW
             Agent.updatePosition = false;
             DefaultStopDistance = StoppingDistance;                             //Store the Started Stopping Distance
             Agent.stoppingDistance = StoppingDistance;
-            SetDestination(EcoManager.GetRandomPosition());
+            SetDestination(EcoManager.Instance.GetRandomPosition());
 
             //SetTarget(Target);                                                  //Set the first Target
             IsWaiting = false;
@@ -353,7 +353,7 @@ namespace YGW
                 targetPosition = NullVector;                            //Reset the TargetPosition
                 Agent.isStopped = true;                                 //Stop the Agent
 
-                SetNextTarget(Random.Range(0f, 10f), EcoManager.GetRandomPosition());
+                SetNextTarget(Random.Range(0f, 10f), EcoManager.Instance.GetRandomPosition());
             }
 
             animal.Move(Direction);                                     //Set the Movement to the Animal

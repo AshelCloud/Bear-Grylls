@@ -4,10 +4,11 @@ using UnityEngine;
 
 namespace YGW
 {
-    public class EcoManager : MonoBehaviour
+    public sealed class EcoManager : Singleton<EcoManager>
     {
-        private static Terrain map;
-        private static Terrain Map
+        [SerializeField]
+        private Terrain map;
+        public Terrain Map
         {
             get
             {
@@ -19,17 +20,7 @@ namespace YGW
             }
         }
 
-        private void Awake()
-        {
-
-        }
-
-        private void Start()
-        {
-
-        }
-
-        public static Vector3 GetRandomPosition()
+        public Vector3 GetRandomPosition()
         {
             RaycastHit hit;
 

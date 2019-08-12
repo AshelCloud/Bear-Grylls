@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace YGW
 {
-    public class Deer : MonoBehaviour
+    public class Deer : AnimalAI
     {
         
     }
