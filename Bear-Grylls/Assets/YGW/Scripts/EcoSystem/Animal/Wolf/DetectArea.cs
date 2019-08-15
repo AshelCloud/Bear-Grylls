@@ -10,7 +10,7 @@ namespace YGW
 
         [SerializeField]
         private CapsuleCollider spine;
-        private CapsuleCollider Spine
+        public CapsuleCollider Spine
         {
             get
             {
@@ -21,6 +21,16 @@ namespace YGW
 
                 return spine;
             }
+
+            private set
+            {
+                spine = value;
+            }
+        }
+
+        private void Start()
+        {
+            Spine = GetComponent<CapsuleCollider>();
         }
 
 

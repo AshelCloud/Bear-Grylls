@@ -7,8 +7,34 @@ namespace YGW
     public class Wolf : AnimalAI
     {
         #region Variable
-        public bool IsHead { get; set; } = false;
-        public GameObject Head { get; set; }
+        [SerializeField]
+        private bool isHead = false;
+        public bool IsHead 
+        {
+            get
+            {
+                return isHead;
+            }
+            set
+            {
+                isHead = value;
+            }
+        }
+        [SerializeField]
+        private GameObject head;
+        public GameObject Head 
+        {
+            get
+            {
+                return head;
+            }
+            set
+            {
+                head = value;
+            }
+        }
+        public int LoadCnt { get; set; } = 0;
+        public const int MaxLoadCnt = 10;
 
         private DetectArea inArea;
         public DetectArea InArea
@@ -33,20 +59,19 @@ namespace YGW
 
         private void Update()
         {
+            base.Updating();
+
+            if(Head == null) { return; }
+
             if(IsHead == false)
             {
-                if(InArea.Detected == true)
-                {
-                    SetDestination(EcoManager.Instance.GetRandomPosition());
-                }
-                else
+                if(InArea.Detected == false)
                 {
                     SetTarget(Head.transform);
                 }
             }
-            base.Updating();
+
         }
-        
         #endregion
 
         #region Function
