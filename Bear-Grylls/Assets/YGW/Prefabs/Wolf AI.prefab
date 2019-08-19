@@ -1,5 +1,63 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2353808767739573292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5645665722102147288}
+  - component: {fileID: 7983474874997899249}
+  - component: {fileID: 8945168606238611485}
+  m_Layer: 20
+  m_Name: TrackCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5645665722102147288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2353808767739573292}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5450266370637523930}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &7983474874997899249
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2353808767739573292}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 30
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8945168606238611485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2353808767739573292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1cc854e5421f694baaa6c0e3bbbe36b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foods: []
 --- !u!1 &5451609700926531258
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,6 +913,7 @@ GameObject:
   - component: {fileID: 5348087856148306806}
   - component: {fileID: 5370842975364430398}
   - component: {fileID: 2724486731608355135}
+  - component: {fileID: -6179168918106682865}
   m_Layer: 20
   m_Name: Wolf AI
   m_TagString: Player
@@ -891,6 +950,7 @@ Transform:
   - {fileID: 5457416824347172478}
   - {fileID: 5238663623665513216}
   - {fileID: 6365520103896081448}
+  - {fileID: 5645665722102147288}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1087,7 +1147,18 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   OnAction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2724486731608355135}
+        m_MethodName: Effect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   OnSwim:
@@ -1350,6 +1421,31 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   isHead: 0
   head: {fileID: 0}
+--- !u!114 &-6179168918106682865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5452454216184270404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59504a774be4e24ca25f56250d3200f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHuman: 0
+  hygiene: 100
+  thirst: 0
+  temperature: 0
+  hungry: 0
+  coldness: 0
+  fatigue: 0
+  _disease: 0
+  _dehydration: 0
+  _fever: 0
+  _malnutrition: 0
+  _cold: 0
+  _strain: 0
 --- !u!1 &5452632516980177852
 GameObject:
   m_ObjectHideFlags: 0

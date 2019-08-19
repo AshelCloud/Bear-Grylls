@@ -47,7 +47,7 @@ namespace YGW
         public float Hungry
         {
             get { return hungry; }
-            private set { hungry = value; }
+            set { hungry = value; }
         }
 
         [Range(0f, 100f)]
