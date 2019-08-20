@@ -1456,7 +1456,6 @@ GameObject:
   - component: {fileID: 3339759883897615333}
   - component: {fileID: 3340389236817677137}
   - component: {fileID: 3339759882560448609}
-  - component: {fileID: 803294447481661139}
   - component: {fileID: 3339759882273549717}
   - component: {fileID: 3338425070270384167}
   - component: {fileID: 3339952815363943639}
@@ -1809,42 +1808,6 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   showMeshesList: 1
   random: 0
---- !u!114 &803294447481661139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3445176806303991717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c84f6a889d6b64e4ba220fc0f73d2885, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AutoSpeed: 1
-  ToTrot: 6
-  ToRun: 8
-  stoppingDistance: 0.6
-  OnTargetPositionArrived:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: MalbersAnimations.Events.Vector3Event, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnTargetArrived:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: MalbersAnimations.Events.TransformEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnActionStart:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnActionEnd:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &3339759882273549717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1933,10 +1896,10 @@ MonoBehaviour:
   viewDistance: 8.33
   targetMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1049088
   viewMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1049088
 --- !u!114 &3339952815363943639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2002,6 +1965,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1930e763316c69b4591ca2284be492b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AutoSpeed: 1
+  ToTrot: 6
+  ToRun: 8
+  stoppingDistance: 0.6
+  OnTargetPositionArrived:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MalbersAnimations.Events.Vector3Event, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnTargetArrived:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MalbersAnimations.Events.TransformEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnActionStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnActionEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &3445176806392365151
 GameObject:
   m_ObjectHideFlags: 0

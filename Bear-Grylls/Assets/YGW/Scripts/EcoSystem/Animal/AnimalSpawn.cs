@@ -4,11 +4,15 @@ using UnityEngine;
 
 namespace YGW
 {
-    public class AnimalSpawn<T> : MonoBehaviour
+    [RequireComponent(typeof(BoxCollider))]
+    public class AnimalSpawn<T> : MonoBehaviour where T : MonoBehaviour
     {
         #region Variable
         [SerializeField]
         protected GameObject animal;
+
+        [SerializeField]
+        protected List<GameObject> animals;
 
         [Range(0, 100)]
         [SerializeField]
@@ -22,6 +26,20 @@ namespace YGW
             protected set
             {
                 limitAnimalCount = value;
+            }
+        }
+
+        [SerializeField]
+        private BoxCollider boxCollider;
+        public BoxCollider BoxCollider
+        {
+            get
+            {
+                if(boxCollider == null)
+                {
+                    boxCollider = GetComponent<BoxCollider>();
+                }
+                return boxCollider;
             }
         }
 
@@ -65,7 +83,7 @@ namespace YGW
             CurAnimalCount = GetComponentsInChildren<T>().Length;
         }
 
-        private void Update()
+        protected void Update()
         {
             if (LimitAnimalCount < CurAnimalCount)
             {
@@ -98,6 +116,23 @@ namespace YGW
         #endregion
 
         #region Function
+        private Vector3 RandomPositionInArea()
+        {
+            Vector3 minVector = new Vector3(transform.position.x - BoxCollider.size.x, BoxCollider.size.y / 2, transform.position.z - BoxCollider.size.z);
+            Vector3 maxVector = new Vector3(transform.position.x + BoxCollider.size.x, BoxCollider.size.y / 2, transform.position.z + BoxCollider.size.z);
+
+            Vector3 random = new Vector3(Random.Range(minVector.x, maxVector.x), Random.Range(minVector.y, maxVector.y), Random.Range(minVector.z, maxVector.z));
+
+            RaycastHit hit;
+            Ray ray = new Ray(random, Vector3.down);
+            
+            if(EcoManager.Instance.MapCollider.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                random.y = hit.transform.position.y;
+            }
+
+            return random;
+        }
         #endregion
 
         #region Coroutine
@@ -105,7 +140,9 @@ namespace YGW
         {
             while (CurAnimalCount < LimitAnimalCount)
             {
-                Instantiate(animal, EcoManager.GetRandomPosition(), Quaternion.identity, transform);
+                var ani = Instantiate(animal, RandomPositionInArea(), Quaternion.identity, transform);
+
+                animals.Add(ani);
 
                 yield return new WaitForFixedUpdate();
             }
@@ -117,9 +154,10 @@ namespace YGW
         {
             while (LimitAnimalCount < CurAnimalCount)
             {
-                var animals = GetComponentsInChildren<T>() as Component[];
+                var anis = GetComponentsInChildren<T>() as Component[];
                 
-                Destroy(animals[CurAnimalCount - 1].gameObject);
+                animals.Remove(anis[CurAnimalCount - 1].gameObject);
+                Destroy(anis[CurAnimalCount - 1].gameObject);
 
                 yield return new WaitForFixedUpdate();
             }
