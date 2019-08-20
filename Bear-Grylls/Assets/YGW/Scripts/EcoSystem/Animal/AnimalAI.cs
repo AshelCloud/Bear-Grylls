@@ -29,6 +29,19 @@ namespace YGW
 
         }
 
+        private LookAt look;
+        public LookAt Look
+        {
+            get
+            {
+                if (look == null)
+                {
+                    look = GetComponent<LookAt>();
+                }
+
+                return look;
+            }
+        }
 
         protected STATE State { get; set; } = STATE.IDLE;
 

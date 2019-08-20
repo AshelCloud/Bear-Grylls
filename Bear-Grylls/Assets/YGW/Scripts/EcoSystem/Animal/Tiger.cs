@@ -7,19 +7,6 @@ namespace YGW
     public class Tiger : AnimalAI
     {
         #region Variable
-        private LookAt look;
-        public LookAt Look
-        {
-            get
-            {
-                if(look == null)
-                {
-                    look = GetComponent<LookAt>();
-                }
-
-                return look;
-            }
-        }
         #endregion
 
         #region MonoEvents
@@ -43,7 +30,7 @@ namespace YGW
                 SetTarget(Look.Target);
             }
 
-            base.Updating();
+            base.Updating();  
         }
         #endregion
 
