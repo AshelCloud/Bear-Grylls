@@ -14,9 +14,17 @@ namespace YGW
             {
                 if (map == null)
                 {
-                    map = GameObject.Find("Map").GetComponent<Terrain>();
+                    map = Terrain.activeTerrain;
                 }
                 return map;
+            }
+        }
+
+        public TerrainCollider MapCollider
+        {
+            get
+            {
+                return Map.GetComponent<TerrainCollider>();
             }
         }
 
@@ -33,7 +41,7 @@ namespace YGW
 
             Ray ray = new Ray(pos, Vector3.down);
 
-            if (Physics.Raycast(ray, out hit, float.MaxValue))
+            if (MapCollider.Raycast(ray, out hit, float.MaxValue))
             {
                 pos.y = hit.point.y;
             }
