@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Bear-Grylls/Assets/New Terrain 2.asset.meta
-guid: fae64a785608c604ca4b2d4a57a476da
-NativeFormatImporter:
-  externalObjects: {}
-  mainObjectFileID: 15600000
-=======
-guid: 07de45a8c7212dd4680cb7f794e35faf
+guid: 692e4ac1a1183d646a85dc5ae24133a4
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
->>>>>>> master:Bear-Grylls/Assets/YGW/Scene.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

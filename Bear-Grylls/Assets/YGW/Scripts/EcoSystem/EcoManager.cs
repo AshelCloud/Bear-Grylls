@@ -33,7 +33,7 @@ namespace YGW
             RaycastHit hit;
 
             Vector3 scale = Map.transform.lossyScale;
-            
+
             Vector3 mapPos = Map.transform.position;
 
             Vector3 pos = new Vector3(Random.Range(mapPos.x, mapPos.x + Map.terrainData.size.x),
@@ -45,18 +45,18 @@ namespace YGW
             {
                 pos.y = hit.transform.position.y;
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                if(hit.collider.CompareTag("Map"))
+                if (Physics.Raycast(ray, out hit))
                 {
-                    pos.y = hit.point.y;
+                    if (hit.collider.CompareTag("Map"))
+                    {
+                        pos.y = hit.point.y;
+                    }
+                }
+                else
+                {
+                    pos.y = Random.Range(Map.transform.position.y, Map.transform.position.y + Map.terrainData.size.y);
                 }
             }
-            else
-            {
-                pos.y = Random.Range(Map.transform.position.y, Map.transform.position.y + Map.terrainData.size.y);
-            }
-
             return pos;
         }
     }
