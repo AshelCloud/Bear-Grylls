@@ -4,44 +4,49 @@ using UnityEngine;
 
 namespace YGW
 {
-    public class EcoManager : MonoBehaviour
+    public sealed class EcoManager : Singleton<EcoManager>
     {
-        private static Terrain map;
-        private static Terrain Map
+        [SerializeField]
+        private Terrain map;
+        public Terrain Map
         {
             get
             {
                 if (map == null)
                 {
-                    map = GameObject.Find("Map").GetComponent<Terrain>();
+                    map = Terrain.activeTerrain;
                 }
                 return map;
             }
         }
 
-        private void Awake()
+        public TerrainCollider MapCollider
         {
-
+            get
+            {
+                return Map.GetComponent<TerrainCollider>();
+            }
         }
 
-        private void Start()
-        {
-
-        }
-
-        public static Vector3 GetRandomPosition()
+        public Vector3 GetRandomPosition()
         {
             RaycastHit hit;
 
             Vector3 scale = Map.transform.lossyScale;
+            
+            Vector3 mapPos = Map.transform.position;
 
-            Vector3 pos = new Vector3(Random.Range(Map.transform.position.x, Map.transform.position.x + Map.terrainData.size.x), 10000f, Random.Range(map.transform.position.z, map.transform.position.z + Map.terrainData.size.z));
+            Vector3 pos = new Vector3(Random.Range(mapPos.x, mapPos.x + Map.terrainData.size.x),
+                                    10000f, Random.Range(mapPos.z, mapPos.z + Map.terrainData.size.z));
 
             Ray ray = new Ray(pos, Vector3.down);
 
-            if (Physics.Raycast(ray, out hit, float.MaxValue))
+            if (Physics.Raycast(ray, out hit))
             {
-                pos.y = hit.point.y;
+                if(hit.collider.CompareTag("Map"))
+                {
+                    pos.y = hit.point.y;
+                }
             }
             else
             {

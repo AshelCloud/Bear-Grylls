@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using MalbersAnimations;
+using MalbersAnimations.Utilities;
 using UnityEngine;
 
 namespace YGW
@@ -17,11 +17,25 @@ namespace YGW
 
         private void Update()
         {
-            base.Updating();
+            Deer isDeer = null;
+
+            if (Look.Target != null)
+            {
+                isDeer = Utils.GetRoot(Look.Target).GetComponent<Deer>();
+            }
+
+            if (isDeer != null)
+            {
+                State = STATE.HUNT;
+                SetTarget(Look.Target);
+            }
+
+            base.Updating();  
         }
         #endregion
 
         #region Function
+        
         #endregion
 
         #region Coroutine

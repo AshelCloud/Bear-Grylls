@@ -10482,7 +10482,7 @@ GameObject:
   - component: {fileID: 1235280500441703}
   m_Layer: 20
   m_Name: Tiger White AI
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10837,10 +10837,10 @@ MonoBehaviour:
   viewDistance: 14.71
   targetMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1049088
   viewMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1049088
 --- !u!114 &7487437573596001310
 MonoBehaviour:
   m_ObjectHideFlags: 0

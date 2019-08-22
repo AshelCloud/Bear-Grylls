@@ -16,10 +16,32 @@ namespace YGW
         protected enum STATE
         {
             IDLE,
+            HUNGRY,
             HUNT,
             RUN,
         }
 
+        protected enum ActionID
+        {
+            zero,
+            one,
+            Eat,
+
+        }
+
+        private LookAt look;
+        public LookAt Look
+        {
+            get
+            {
+                if (look == null)
+                {
+                    look = GetComponent<LookAt>();
+                }
+
+                return look;
+            }
+        }
 
         protected STATE State { get; set; } = STATE.IDLE;
 
@@ -115,6 +137,8 @@ namespace YGW
             }
         }
 
+        protected ActionZone isActionZone;
+
         //Event Variables
         public Vector3Event OnTargetPositionArrived = new Vector3Event();
         public TransformEvent OnTargetArrived = new TransformEvent();
@@ -155,7 +179,7 @@ namespace YGW
             Agent.updatePosition = false;
             DefaultStopDistance = StoppingDistance;                             //Store the Started Stopping Distance
             Agent.stoppingDistance = StoppingDistance;
-            SetDestination(EcoManager.GetRandomPosition());
+            SetDestination(EcoManager.Instance.GetRandomPosition());
 
             //SetTarget(Target);                                                  //Set the first Target
             IsWaiting = false;
@@ -163,6 +187,8 @@ namespace YGW
 
         protected virtual void Updating()
         {
+            SetState();
+
             if (Stopped)
             {
                 if (TargetisMoving)
@@ -185,7 +211,7 @@ namespace YGW
                 else
                     UpdateAgent();
             }
-
+            
             if (Target)
             {
                 if (TargetisMoving) UpdateTargetTransform();
@@ -199,6 +225,14 @@ namespace YGW
             Debug.DrawLine(transform.position, targetPosition, Color.blue);
         }
 
+        private void SetState()
+        {
+            if (Condition.Hungry > 30f)
+            {
+                State = STATE.HUNGRY;
+            }
+        }
+
         protected virtual void SetTarget(Transform target)
         {
             if (target == null)
@@ -206,6 +240,8 @@ namespace YGW
                 StopAnimal();
                 return;             //If there's no target Skip the code
             }
+
+            isActionZone = target.GetComponent<ActionZone>();
 
             this.Target = target;
             targetPosition = target.position;       //Update the Target Position 
@@ -261,7 +297,7 @@ namespace YGW
             {
                 animal.Speed1 = true;
             }
-            else if (/* RemainingDistance > ToRun && */ State == STATE.HUNT || State == STATE.RUN)     //Set to Run
+            else     //Set to Run
             {
                 animal.Speed3 = true;
             }
@@ -329,7 +365,7 @@ namespace YGW
             var Direction = Vector3.zero;                               //Reset the Direction (THIS IS THE DIRECTION VECTOR SENT TO THE ANIMAL)  
 
             RemainingDistance = Agent.remainingDistance;                    //Store the remaining distance -- but if navMeshAgent is still looking for a path Keep Moving
-            //RemainingDistance = Agent.remainingDistance <=0 ? float.PositiveInfinity : Agent.remainingDistance;
+            RemainingDistance = Agent.remainingDistance <=0 ? float.PositiveInfinity : Agent.remainingDistance;
 
             if (Agent.pathPending || Mathf.Abs(RemainingDistance) <= 0.1f)      //In Case the remaining Distance is wrong
             {
@@ -353,7 +389,7 @@ namespace YGW
                 targetPosition = NullVector;                            //Reset the TargetPosition
                 Agent.isStopped = true;                                 //Stop the Agent
 
-                SetNextTarget(Random.Range(0f, 10f), EcoManager.GetRandomPosition());
+                CheckNextTarget();
             }
 
             animal.Move(Direction);                                     //Set the Movement to the Animal
@@ -361,8 +397,26 @@ namespace YGW
             if (AutoSpeed) AutomaticSpeed();                            //Set Automatic Speeds
             CheckOffMeshLinks();                                        //Jump/Fall behaviour 
         }
-        
-        
+
+        private void CheckNextTarget()
+        {
+            if (isActionZone && !DoingAnAction)                     //If the Target is an Action Zone Start the Action
+            {
+                animal.Action = true;                               //Activate the Action on the Animal (The ID is Given by the ACTION ZONE)
+                animal.Stop();
+
+                if (isActionZone.MoveToExitAction)
+                {
+                    float time = isActionZone.WaitTime;
+                    animal.Invoke("WakeAnimal", time);
+                }
+            }
+            else //if (isWayPoint)                                    //If the Next Target is a Waypoint
+            {
+                SetNextTarget(Random.Range(0f, 10f), EcoManager.Instance.GetRandomPosition());
+            }
+        }
+
         IEnumerator WaitToNextTargetC;
 
         /// <summary>
@@ -449,8 +503,8 @@ namespace YGW
             if (Agent && Agent.isOnNavMesh) Agent.isStopped = true;
             targetPosition = NullVector;
             StopAllCoroutines();
-            //DoingAnAction = false;
-            //animal.InterruptAction();
+            DoingAnAction = false;
+            animal.InterruptAction();
             if (animal) animal.Stop();
             IsWaiting = false;
             Stopped = true;
@@ -460,7 +514,7 @@ namespace YGW
         #region Coroutine
         protected virtual IEnumerator WaitToNextTarget(float time, Vector3 NextPos)
         {
-            //if (isActionZone && isActionZone.MoveToExitAction) time = 0;    //Do not wait if the Action Zone was a 'Move to Exit" one
+            if (isActionZone && isActionZone.MoveToExitAction) time = 0;    //Do not wait if the Action Zone was a 'Move to Exit" one
 
 
             if (time > 0)
@@ -478,7 +532,7 @@ namespace YGW
 
         protected virtual IEnumerator WaitToNextTarget(float time, Transform NextTarget)
         {
-            //if (isActionZone && isActionZone.MoveToExitAction) time = 0;    //Do not wait if the Action Zone was a 'Move to Exit" one
+            if (isActionZone && isActionZone.MoveToExitAction) time = 0;    //Do not wait if the Action Zone was a 'Move to Exit" one
 
 
             if (time > 0)
