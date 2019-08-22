@@ -231,6 +231,11 @@ namespace YGW
             {
                 State = STATE.HUNGRY;
             }
+
+            else
+            {
+                State = STATE.IDLE;
+            }
         }
 
         protected virtual void SetTarget(Transform target)
