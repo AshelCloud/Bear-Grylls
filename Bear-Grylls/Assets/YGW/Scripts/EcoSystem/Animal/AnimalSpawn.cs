@@ -121,7 +121,7 @@ namespace YGW
             Vector3 minVector = new Vector3(transform.position.x - (BoxCollider.size.x / 2), BoxCollider.size.y / 2, transform.position.z - (BoxCollider.size.z / 2));
             Vector3 maxVector = new Vector3(transform.position.x + (BoxCollider.size.x / 2), BoxCollider.size.y / 2, transform.position.z + (BoxCollider.size.z / 2));
 
-            Vector3 random = new Vector3(Random.Range(minVector.x, maxVector.x), Random.Range(minVector.y, maxVector.y), Random.Range(minVector.z, maxVector.z));
+            Vector3 random = new Vector3(Random.Range(minVector.x, maxVector.x), 1000f, Random.Range(minVector.z, maxVector.z));
 
             RaycastHit hit;
             Ray ray = new Ray(random, Vector3.down);
