@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/PSM/Testasd.unity
+    guid: 790bfe5b0b5bae241b2f3b4fd59263a1
   m_configObjects: {}

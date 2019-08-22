@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PSM
 {
     [RequireComponent(typeof(RigidbodyController))]
-    public class RigidbodyControllerControlledJump : MonoBehaviour
+    public class RigidbodyControllerControllJump : MonoBehaviour
     {
         #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         [Tooltip("하위 오브젝트의 JumpState 스크립트를 가져와야 합니다.")]
