@@ -44,6 +44,13 @@ namespace YGW
             if (MapCollider.Raycast(ray, out hit, Mathf.Infinity))
             {
                 pos.y = hit.transform.position.y;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if(hit.collider.CompareTag("Map"))
+                {
+                    pos.y = hit.point.y;
+                }
             }
             else
             {

@@ -1896,10 +1896,10 @@ MonoBehaviour:
   viewDistance: 8.33
   targetMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1049088
   viewMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1049088
 --- !u!114 &3339952815363943639
 MonoBehaviour:
   m_ObjectHideFlags: 0
