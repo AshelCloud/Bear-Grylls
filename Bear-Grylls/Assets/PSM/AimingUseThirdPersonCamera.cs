@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PSM
 {
-    public class AimingUseThirdPersonCamera : MonoBehaviour
+    public class AimingUseThirdPersonCamera : MonoBehaviour, UsingAnimatorManagerComponent
     {
         #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         [Header("- Required Setting -")]
@@ -19,9 +19,34 @@ namespace PSM
 
         private Vector3 backUpPosCorrection;
         private float backUpDefaultDistance;
+
+        private enum BowState
+        {
+            idle,
+            load
+
+
+        }
+        private BowState bowState = BowState.idle;
+
         #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         #region Function - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        public void ForInit(Animator animator)
+        {
 
+        }
+        public void UpdateAnimator(Animator animator)
+        {
+            if(bowState == BowState.idle)
+            {
+
+            }
+            else if (bowState == BowState.load)
+            {
+
+            }
+
+        }
         #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         #region Coroutine - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

@@ -90,7 +90,8 @@ namespace PSM
             targetPos += target.forward.normalized * posCorrection.z;
             targetPos += target.right.normalized * posCorrection.x;
 
-            parentOffsetTransform.position = targetPos;
+
+            parentOffsetTransform.position = Vector3.Lerp(parentOffsetTransform.position, targetPos, Time.deltaTime * 5);
         }
         private void WhenUsedOffsetEulerAnglesProperty()
         {
