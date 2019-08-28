@@ -2,6 +2,7 @@
 using MalbersAnimations.Events;
 using MalbersAnimations.Utilities;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -27,6 +28,43 @@ namespace YGW
             one,
             Eat,
 
+        }
+
+        protected Animal AnimalComponent
+        {
+            get
+            {
+                return GetComponent<Animal>();
+            }
+        }   
+
+        [SerializeField]
+        private float attackDistance;
+        public float AttackDistance
+        {
+            get { return attackDistance; }
+        }
+
+        [SerializeField]
+        private List<SphereCollider> attackCollider;
+        protected List<SphereCollider> AttackCollider
+        {
+            get
+            {
+                if(attackCollider == null)
+                {
+                    var childrens = GetComponentsInChildren<SphereCollider>();
+                    for(int i = 0; i < childrens.Length; i ++)
+                    {
+                        if(childrens[i].name.Contains("Attack"))
+                        {
+                            attackCollider.Add(childrens[i]);
+                        }
+                    }
+                }
+
+                return attackCollider;
+            }
         }
 
         private LookAt look;
@@ -187,8 +225,6 @@ namespace YGW
 
         protected virtual void Updating()
         {
-            SetState();
-
             if (Stopped)
             {
                 if (TargetisMoving)
@@ -225,13 +261,12 @@ namespace YGW
             Debug.DrawLine(transform.position, targetPosition, Color.blue);
         }
 
-        private void SetState()
+        protected void SetState()
         {
             if (Condition.Hungry > 30f)
             {
                 State = STATE.HUNGRY;
             }
-
             else
             {
                 State = STATE.IDLE;
@@ -552,6 +587,46 @@ namespace YGW
 
             yield return null;
         }
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            if(Look.debug)
+            {
+                UnityEditor.Handles.color = new Color(1f, 0f, 0f, 0.1f);
+
+                var Bones = Look.Bones;
+
+                Transform Center = Bones != null && Bones.Length > 0 && Bones[Bones.Length - 1] != null ? Bones[Bones.Length - 1].bone : null;
+                if (Center != null)
+                {
+                    UnityEditor.Handles.DrawSolidArc(Center.position, Vector3.up, Quaternion.Euler(0, -80, 0) * transform.forward, 80 * 2, AttackDistance);
+                    UnityEditor.Handles.DrawWireArc(Center.position, Vector3.up, Quaternion.Euler(0, -80, 0) * transform.forward, 80 * 2, AttackDistance);
+                }
+            }
+            //if (debug)
+            //{
+            //    UnityEditor.Handles.color = new Color(0, 1, 0, 0.1f);
+
+            //    Transform Center = Bones != null && Bones.Length > 0 && Bones[Bones.Length - 1] != null ? Bones[Bones.Length - 1].bone : null;
+            //    if (Center != null)
+            //    {
+            //        UnityEditor.Handles.DrawSolidArc(Center.position, Vector3.up, Quaternion.Euler(0, -LimitAngle, 0) * transform.forward, LimitAngle * 2, viewDistance);
+            //        UnityEditor.Handles.color = Color.green;
+            //        UnityEditor.Handles.DrawWireArc(Center.position, Vector3.up, Quaternion.Euler(0, -LimitAngle, 0) * transform.forward, LimitAngle * 2, viewDistance);
+            //    }
+            //}
+
+            //if (Application.isPlaying)
+            //{
+
+            //    if (IsAiming)
+            //    {
+            //        Gizmos.color = Color.green;
+            //        Gizmos.DrawSphere(aimHit.point, 0.05f);
+            //    }
+            //}
+        }
+#endif
         #endregion
     }
 }

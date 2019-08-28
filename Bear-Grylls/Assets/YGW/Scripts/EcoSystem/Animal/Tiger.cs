@@ -22,20 +22,30 @@ namespace YGW
             if (Look.Target != null)
             {
                 isDeer = Utils.GetRoot(Look.Target).GetComponent<Deer>();
+                if (isDeer != null)
+                {
+                    State = STATE.HUNT;
+                    SetTarget(Look.Target);
+
+                    if (Vector3.Distance(Look.Target.transform.position, transform.position) < AttackDistance)
+                    {
+                        if(isDeer.GetComponent<Animal>().Death)
+                        {
+                            AnimalComponent.SetAction(2);
+                        }
+                        else
+                        {
+                            GetComponent<Animal>().SetAttack(1);
+                        }
+                    }
+                }
             }
 
-            if (isDeer != null)
-            {
-                State = STATE.HUNT;
-                SetTarget(Look.Target);
-            }
-
-            base.Updating();  
+            base.Updating();
         }
         #endregion
 
         #region Function
-        
         #endregion
 
         #region Coroutine

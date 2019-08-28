@@ -10881,6 +10881,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f648a21851a972548b9327fa0ab0d4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDistance: 3
+  attackCollider:
+  - {fileID: 7466600679967910416}
+  - {fileID: 7465935466805985520}
   AutoSpeed: 1
   ToTrot: 6
   ToRun: 8
