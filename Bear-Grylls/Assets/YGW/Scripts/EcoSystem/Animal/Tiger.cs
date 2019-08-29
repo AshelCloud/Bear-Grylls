@@ -22,6 +22,7 @@ namespace YGW
             if (Look.Target != null)
             {
                 isDeer = Utils.GetRoot(Look.Target).GetComponent<Deer>();
+
                 if (isDeer != null)
                 {
                     State = STATE.HUNT;
@@ -33,9 +34,10 @@ namespace YGW
                         {
                             AnimalComponent.SetAction(2);
                         }
-                        else
+                        else if(AttackTime >= AttackRate)
                         {
-                            GetComponent<Animal>().SetAttack(1);
+                            AttackTime = 0f;
+                            AnimalComponent.SetAttack(1);
                         }
                     }
                 }

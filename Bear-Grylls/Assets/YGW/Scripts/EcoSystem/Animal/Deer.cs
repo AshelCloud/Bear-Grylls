@@ -8,7 +8,6 @@ namespace YGW
     public class Deer : AnimalAI
     {
         #region Variable
-        bool Once = false;
         #endregion
 
         #region MonoEvents
@@ -24,19 +23,16 @@ namespace YGW
             if (Look.Target != null)
             {
                 isTiger = Utils.GetRoot(Look.Target).GetComponent<Tiger>();
+                if (isTiger != null)
+                {
+                    State = STATE.RUN;
+                }
             }
-            else
+            else if (AnimalComponent.Damaged == true)
             {
-                Once = false;
-                State = STATE.IDLE;
+                State = STATE.RUN;
             }
 
-            if (isTiger != null && Once == false)
-            {
-                Once = true;
-                State = STATE.RUN;
-                SetDestination(EcoManager.Instance.GetRandomPosition());
-            }
 
             base.Updating();
         }

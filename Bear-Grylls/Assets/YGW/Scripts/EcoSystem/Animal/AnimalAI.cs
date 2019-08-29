@@ -38,6 +38,16 @@ namespace YGW
             }
         }   
 
+        protected float AttackTime { get; set; } = 0f;
+
+        [SerializeField]
+        private float attackRate;
+        public float AttackRate
+        {
+            get { return attackRate;}
+            set { attackRate = value; }
+        }
+
         [SerializeField]
         private float attackDistance;
         public float AttackDistance
@@ -225,6 +235,8 @@ namespace YGW
 
         protected virtual void Updating()
         {
+            AttackTime += Time.deltaTime;
+
             if (Stopped)
             {
                 if (TargetisMoving)
