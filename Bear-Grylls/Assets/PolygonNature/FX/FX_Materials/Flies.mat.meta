@@ -1,9 +1,15 @@
 fileFormatVersion: 2
+Bear-Grylls/Assets/PolygonNature/FX/FX_Materials/Flies.mat.meta
 guid: 2ebe5f4397ab6f540a440c1b54e797bf
 timeCreated: 1527658087
 licenseType: Store
 NativeFormatImporter:
   mainObjectFileID: 2100000
+guid: 2b907199323ffdc458c91749f5601ef2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+origin/PSM:Bear-Grylls/Assets/COMMON/Polygonal Fantasy Pack/Post Processing Files/Environment Scene.asset.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
