@@ -305,7 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animal: {fileID: 7734619938470218063, guid: 54c0cb58305abb74087048aeb2f948bd, type: 3}
   animals: []
-  limitAnimalCount: 1
+  limitAnimalCount: 0
   boxCollider: {fileID: 0}
   curAnimalCount: 0
 --- !u!65 &1206802931
