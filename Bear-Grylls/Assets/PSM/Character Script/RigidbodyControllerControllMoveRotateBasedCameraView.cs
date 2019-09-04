@@ -7,7 +7,7 @@ namespace PSM
 {
     [RequireComponent(typeof(RigidbodyController))]
     [RequireComponent(typeof(AnimatorManager))]
-    public class RigidbodyControllerControllMoveRotateBasedCameraView : MonoBehaviour, UsingAnimatorManagerComponent
+    public class RigidbodyControllerControllMoveRotateBasedCameraView : MonoBehaviour, UsingAnimatorManagerComponent, ApplyedComponentBuffOrDeBuff
     {
         #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         public Camera Camera { get { return camera; } set { camera = value; } }
@@ -38,6 +38,7 @@ namespace PSM
         private bool isSetedRotateCameraForward = false;
         #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         #region Function - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        //public
         public void Move(Vector3 move, bool direction = true)
         {
             controller.AddForce(moveVec);
@@ -50,16 +51,16 @@ namespace PSM
         {
             isSetedRotateCameraForward = true;
         }
-
+        //interface
         public void ForInit(Animator animator, AnimatorManager aniManager)
         {
         }
         public void UpdateAnimator(Animator animator, AnimatorManager aniManager)
         {
-            Vector3 velocity = controller.velocity;
+            Vector3 velocity = controller.Velocity;
             velocity.y = 0;
 
-            float rate = velocity.magnitude / controller.maxSpeed;
+            float rate = velocity.magnitude / controller.MaxSpeed;
             float maxSpeed = animator.GetInteger("ConstMaxSpeed");
 
             animator.SetFloat("Speed", maxSpeed * rate);
@@ -81,7 +82,19 @@ namespace PSM
                 animator.SetBool("isLeftWalk", false);
             }
         }
-
+        public void ApplyBuff(BuffsList buffsList)
+        {
+            if(buffsList.buffedSpeed == 0)
+                controller.SetMaxSpeedToDefault();
+            else
+            {
+                if(0.1f <= buffsList.buffedSpeed)
+                    controller.MaxSpeed = controller.DefaultMaxSpeed * buffsList.buffedSpeed;
+                else
+                    controller.MaxSpeed = controller.DefaultMaxSpeed * 0.1f;
+            }
+        }
+        //private
         private void InputMove(Vector3 cameraForward, Vector3 cameraRight)
         {
             moveVec = Vector3.zero;
@@ -148,7 +161,7 @@ namespace PSM
         void Awake()
         {
             controller = GetComponent<RigidbodyController>();
-            controller.useMaxSpeed = true;
+            controller.UseMaxSpeed = true;
         }
         void Update()
         {

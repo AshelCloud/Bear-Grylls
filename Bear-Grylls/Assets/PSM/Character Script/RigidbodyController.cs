@@ -10,29 +10,30 @@ namespace PSM
     public class RigidbodyController : MonoBehaviour
     {
         #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        public Vector3 velocity { get { return rigidbody.velocity; } }
+        public Vector3 Velocity { get { return rigidbody.velocity; } }
+        public bool UseDrag { get { return useDrag; } set { useDrag = value; } }
+        public float StopPower { get { return stopPower; } set { stopPower = value; } }
+        public bool UseMaxSpeed { get { return useMaxSpeed; } set { useMaxSpeed = value; } }
+        public float MaxSpeed { get { return maxSpeed; } set { maxSpeed = value; } }
+        public float DefaultMaxSpeed { get { return defaultMaxSpeed; } }
+
         [SerializeField] private bool editComponentField = false;
         [ConditionalHide("editComponentField", true)]
         [SerializeField] Rigidbody rigidbody = null;
 
-
         [Header("Drag")]
-        public bool useDrag = true;
+        [SerializeField] bool useDrag = true;
         [ConditionalHide("useDrag", true)]
-        [SerializeField]
-        private float _stopPower = 1;
-        public float stopPower
-        {
-            get { return _stopPower;}
-            set { _stopPower = value; }
-        }
+        [SerializeField] float stopPower = 1;
 
         [Header("MaxSpeed")]
-        public bool useMaxSpeed;
+        [SerializeField] bool useMaxSpeed;
         [ConditionalHide("useMaxSpeed", true)]
-        public float maxSpeed = 3;
+        [SerializeField] float maxSpeed = 3;
 
 
+
+        private float defaultMaxSpeed = 0;
         private bool useMove = false;
         #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         #region Function - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -65,7 +66,10 @@ namespace PSM
             velocity.y = rigidbody.velocity.y;
             rigidbody.velocity = velocity;
         }
-
+        public void SetMaxSpeedToDefault()
+        {
+            maxSpeed = defaultMaxSpeed;
+        }
 
         private void Drag()
         {
@@ -97,6 +101,7 @@ namespace PSM
         {
             if (rigidbody == null) rigidbody = GetComponent<Rigidbody>();
             if (rigidbody == null) Debug.LogError("missing rigidbody");
+            defaultMaxSpeed = maxSpeed;
         }
         private void FixedUpdate()
         {

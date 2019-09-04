@@ -42,7 +42,7 @@ namespace PSM
         {
             if (bowState == BowState.load)
             {
-                aniManager.ChangeController("HeroBow");
+                aniManager.ApplySpecialController("HeroBow");
             }
             if (bowState == BowState.cancel)
             {
@@ -51,7 +51,7 @@ namespace PSM
         }
         public void ChangeControllerHeroDefault()
         {
-            aniManager.ChangeController("HeroDefault");
+            aniManager.ApplyBasicController();
         }
         #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         #region Coroutine - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
