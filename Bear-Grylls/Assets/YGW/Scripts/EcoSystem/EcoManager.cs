@@ -37,13 +37,9 @@ namespace YGW
             Vector3 mapPos = Map.transform.position;
 
             Vector3 pos = new Vector3(Random.Range(mapPos.x, mapPos.x + Map.terrainData.size.x),
-                                    1000f, Random.Range(mapPos.z, mapPos.z + Map.terrainData.size.z));
+                                    10000f, Random.Range(mapPos.z, mapPos.z + Map.terrainData.size.z));
 
             Ray ray = new Ray(pos, Vector3.down);
-
-            if (MapCollider.Raycast(ray, out hit, Mathf.Infinity))
-            {
-                pos.y = hit.transform.position.y;
 
             if (Physics.Raycast(ray, out hit))
             {

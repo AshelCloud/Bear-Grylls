@@ -13,8 +13,6 @@ namespace YGW
 
             var animals = root.GetComponentsInChildren<Animal>();
 
-            if(animals == null) { return null; }
-
             for (int i = 0; i < animals.Length; i++)
             {
                 var transforms = animals[i].GetComponentsInChildren<Transform>();

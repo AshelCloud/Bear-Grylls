@@ -65,7 +65,7 @@ namespace YGW
             }
         }
 
-        private bool Once = true;
+        private bool Once = false;
         #endregion
 
         #region MonoEvents

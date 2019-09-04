@@ -36,52 +36,25 @@ namespace YGW
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.CompareTag("Animal") == false)
+            if (other.GetComponent<PackArea>() != null)
             {
-                return;
-            }
-
-            var isWolf = Utils.GetRoot(other.transform).GetComponent<Wolf>();
-            if(isWolf != null)
-            {
-                if (other.GetComponent<PackArea>() != null && isWolf.IsHead == true)
-                {
-                    Detected = true;
-                }
+                Detected = true;
             }
         }
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.CompareTag("Animal") == false)
+            if(other.GetComponent<PackArea>() != null)
             {
-                return;
-            }
-
-            var isWolf = Utils.GetRoot(other.transform).GetComponent<Wolf>();
-            if (isWolf != null)
-            {
-                if (other.GetComponent<PackArea>() != null && isWolf.IsHead == true)
-                {
-                    Detected = true;
-                }
+                Detected = true;
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Animal") == false)
+            if(other.GetComponent<PackArea>() != null)
             {
-                return;
-            }
-
-            var isWolf = Utils.GetRoot(other.transform).GetComponent<Wolf>();
-            if (isWolf != null)
-            {
-                if (other.GetComponent<PackArea>() != null && isWolf.IsHead == true)
-                {
-                    Detected = false;
-                }
+                Detected = false;
             }
         }
     }
