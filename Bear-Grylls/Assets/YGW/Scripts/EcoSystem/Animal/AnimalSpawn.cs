@@ -59,6 +59,20 @@ namespace YGW
 
         private IEnumerator CSpawn;
         private IEnumerator CDelete;
+
+        private BoxCollider boxCollider;
+        public BoxCollider BoxCollider
+        {
+            get
+            {
+                if(boxCollider == null)
+                {
+                    boxCollider = GetComponent<BoxCollider>();
+                }
+
+                return boxCollider;
+            }
+        }
         #endregion
 
         #region MonoEvents
@@ -116,6 +130,18 @@ namespace YGW
         #endregion
 
         #region Function
+        private Vector3 GetRandomPositionInArea()
+        {
+            Vector3 minVector = new Vector3(transform.position.x - (BoxCollider.size.x / 2), BoxCollider.size.y / 2, transform.position.z - (BoxCollider.size.z / 2));
+            Vector3 maxVector = new Vector3(transform.position.x + (BoxCollider.size.x / 2), BoxCollider.size.y / 2, transform.position.z + (BoxCollider.size.z / 2));
+
+            Vector3 random = new Vector3(Random.Range(minVector.x, maxVector.x), 1000f, Random.Range(minVector.z, maxVector.z));
+
+            RaycastHit hit;
+            Ray ray = new Ray(random, Vector3.down);
+
+            if (EcoManager.Instance.MapCollider.Raycast(ray, out hit, float.MaxValue))
+
         private Vector3 RandomPositionInArea()
         {
             Vector3 minVector = new Vector3(transform.position.x - BoxCollider.size.x, BoxCollider.size.y / 2, transform.position.z - BoxCollider.size.z);
@@ -127,6 +153,7 @@ namespace YGW
             Ray ray = new Ray(random, Vector3.down);
             
             if(EcoManager.Instance.MapCollider.Raycast(ray, out hit, Mathf.Infinity))
+
             {
                 random.y = hit.transform.position.y;
             }
@@ -140,6 +167,8 @@ namespace YGW
         {
             while (CurAnimalCount < LimitAnimalCount)
             {
+                var ani = Instantiate(animal, GetRandomPositionInArea(), Quaternion.identity, transform);
+
                 var ani = Instantiate(animal, RandomPositionInArea(), Quaternion.identity, transform);
 
                 animals.Add(ani);
