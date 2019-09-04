@@ -1627,7 +1627,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6544936910875455048}
   - component: {fileID: 7566770060958553267}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: Neck1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

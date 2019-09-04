@@ -91,7 +91,25 @@ namespace YGW
             }
         }
 
-        protected STATE State { get; set; } = STATE.IDLE;
+        private STATE state;
+        protected STATE State 
+        {
+            get
+            {
+                return state;
+            }
+            set
+            {
+                if(state != value)
+                {
+                    state = value;
+                    if(state == STATE.RUN)
+                    {
+                        SetDestination(EcoManager.Instance.GetRandomPosition());
+                    }
+                }
+            }
+        }
 
         public bool AutoSpeed = true;
         public float ToTrot = 6f;
@@ -220,6 +238,8 @@ namespace YGW
         /// </summary>
         protected virtual void StartAgent()
         {
+            State = STATE.IDLE;
+
             animal = GetComponent<Animal>();
             animal.OnAnimationChange.AddListener(OnAnimationChanged);           //Listen when the Animations changes..
 
@@ -312,7 +332,6 @@ namespace YGW
                         if (animal.Tier < AnimalComponent.Tier)
                         {
                             State = STATE.RUN;
-                            SetDestination(EcoManager.Instance.ToTerrainPosition(targetPosition));
                         }
                         break;
                     default:
@@ -337,7 +356,6 @@ namespace YGW
                         if (AnimalComponent.Damaged)
                         {
                             State = STATE.RUN;
-                            SetDestination(EcoManager.Instance.GetRandomPosition());
                         }
                         break;
                     default:

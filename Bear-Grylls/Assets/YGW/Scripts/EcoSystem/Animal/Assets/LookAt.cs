@@ -219,6 +219,8 @@ namespace MalbersAnimations.Utilities
 
             for (int i = 0; i < targets.Length; i++)
             {
+                if(targets[i].isTrigger) { continue; }
+
                 bool isMyBody = false;
                 Transform target = targets[i].transform;
 
@@ -235,7 +237,6 @@ namespace MalbersAnimations.Utilities
                     continue;
                 }
 
-                //탱크로부터 타겟까지의 단위벡터
                 Vector3 dirToTarget = (target.position - transform.position).normalized;
 
                 //_transform.forward와 dirToTarget은 모두 단위벡터이므로 내적값은 두 벡터가 이루는 각의 Cos값과 같다.

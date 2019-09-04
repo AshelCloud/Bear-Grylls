@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1cc854e5421f694baaa6c0e3bbbe36b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foods: []
+  food: {fileID: 0}
 --- !u!1 &5451609700926531258
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,8 +914,9 @@ GameObject:
   - component: {fileID: 5370842975364430398}
   - component: {fileID: 2724486731608355135}
   - component: {fileID: -6179168918106682865}
+  - component: {fileID: 51957957217129757}
   m_Layer: 20
-  m_Name: Wolf AI
+  m_Name: Wolf
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1110,6 +1111,7 @@ MonoBehaviour:
   canFly: 0
   land: 1
   LockUp: 0
+  Tier: 0
   life: 100
   defense: 0
   damageDelay: 0.75
@@ -1395,6 +1397,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6137e3fb696ddc44a76804616be4fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRate: 0
+  attackDistance: 0
+  attackCollider: []
   AutoSpeed: 1
   ToTrot: 6
   ToRun: 8
@@ -1446,6 +1451,41 @@ MonoBehaviour:
   _malnutrition: 0
   _cold: 0
   _strain: 0
+--- !u!114 &51957957217129757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5452454216184270404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 334fda2dd5b998e4abb8119d1343346f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  AnimationActive: 1
+  Ignore:
+    serializedVersion: 2
+    m_Bits: 4
+  UseCamera: 0
+  CameraCenter: {x: 0.5, y: 0.5}
+  Target: {fileID: 0}
+  LimitAngle: 100
+  Smoothness: 5
+  UpVector: {x: 0, y: 1, z: 0}
+  Bones:
+  - bone: {fileID: 5457690668598145566}
+    offset: {x: 0, y: -90, z: -90}
+    weight: 1
+  debug: 1
+  viewDistance: 15
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 1049088
+  viewMask:
+    serializedVersion: 2
+    m_Bits: 1049088
 --- !u!1 &5452632516980177852
 GameObject:
   m_ObjectHideFlags: 0
