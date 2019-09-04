@@ -129,15 +129,10 @@ namespace YGW
 
             if(Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("Terrain")))
             {
-                random.y = GetTerrainHeightAtPoint(hit.point);
+                random.y = EcoManager.Instance.GetTerrainHeightAtPoint(hit.point);
             }
 
             return random;
-        }
-
-        private float GetTerrainHeightAtPoint(Vector3 position)
-        {
-            return EcoManager.Instance.Map.SampleHeight(position);
         }
         #endregion
 

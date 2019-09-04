@@ -36,7 +36,7 @@ namespace YGW
             {
                 return GetComponent<Animal>();
             }
-        }   
+        }
 
         protected float AttackTime { get; set; } = 0f;
 
@@ -44,7 +44,7 @@ namespace YGW
         private float attackRate;
         public float AttackRate
         {
-            get { return attackRate;}
+            get { return attackRate; }
             set { attackRate = value; }
         }
 
@@ -61,12 +61,12 @@ namespace YGW
         {
             get
             {
-                if(attackCollider == null)
+                if (attackCollider == null)
                 {
                     var childrens = GetComponentsInChildren<SphereCollider>();
-                    for(int i = 0; i < childrens.Length; i ++)
+                    for (int i = 0; i < childrens.Length; i++)
                     {
-                        if(childrens[i].name.Contains("Attack"))
+                        if (childrens[i].name.Contains("Attack"))
                         {
                             attackCollider.Add(childrens[i]);
                         }
@@ -177,7 +177,7 @@ namespace YGW
         {
             get
             {
-                if(condition == null)
+                if (condition == null)
                 {
                     condition = GetComponent<ConditionSystem>();
                 }
@@ -186,6 +186,8 @@ namespace YGW
         }
 
         protected ActionZone isActionZone;
+
+        protected Transform CurTarget { get; set; } = null;
 
         //Event Variables
         public Vector3Event OnTargetPositionArrived = new Vector3Event();
@@ -259,7 +261,15 @@ namespace YGW
                 else
                     UpdateAgent();
             }
-            
+
+            /*
+            * 탐색 부분
+            */
+            SearchAndTracking();
+            /*
+             * 탐색 부분
+             */
+
             if (Target)
             {
                 if (TargetisMoving) UpdateTargetTransform();
@@ -271,6 +281,85 @@ namespace YGW
 
             //Debug
             Debug.DrawLine(transform.position, targetPosition, Color.blue);
+        }
+
+        protected void SearchAndTracking()
+        {
+            Animal animal = null;
+
+            if (Look.Target != null)
+            {
+                animal = Utils.GetRoot(Look.Target).GetComponent<Animal>();
+
+                if (animal == null) { return; }
+
+                switch (AnimalComponent.Tier)
+                {
+                    case 1:
+                        if (animal.Tier >= AnimalComponent.Tier)
+                        {
+                            CurTarget = animal.transform;
+                            Attack(animal);
+                        }
+                        break;
+
+                    case 2:
+                        if (animal.Tier > AnimalComponent.Tier)
+                        {
+                        }
+                        break;
+                    case 4:
+                        if (animal.Tier < AnimalComponent.Tier)
+                        {
+                            State = STATE.RUN;
+                            SetDestination(EcoManager.Instance.ToTerrainPosition(targetPosition));
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (AnimalComponent.Tier)
+                {
+                    case 2:
+                        if (AnimalComponent.Damaged)
+                        {
+                        }
+                        break;
+                    case 3:
+                        if (AnimalComponent.Damaged)
+                        {
+                        }
+                        break;
+                    case 4:
+                        if (AnimalComponent.Damaged)
+                        {
+                            State = STATE.RUN;
+                            SetDestination(EcoManager.Instance.GetRandomPosition());
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void Attack(Animal animal)
+        {
+            if (Vector3.Distance(Look.Target.transform.position, transform.position) < AttackDistance)
+            {
+                if (animal.Death)
+                {
+                    AnimalComponent.SetAction(2);
+                }
+                else if (AttackTime >= AttackRate)
+                {
+                    AttackTime = 0f;
+                    AnimalComponent.SetAttack(1);
+                }
+            }
         }
 
         protected void SetState()
@@ -417,7 +506,7 @@ namespace YGW
             var Direction = Vector3.zero;                               //Reset the Direction (THIS IS THE DIRECTION VECTOR SENT TO THE ANIMAL)  
 
             RemainingDistance = Agent.remainingDistance;                    //Store the remaining distance -- but if navMeshAgent is still looking for a path Keep Moving
-            RemainingDistance = Agent.remainingDistance <=0 ? float.PositiveInfinity : Agent.remainingDistance;
+            RemainingDistance = Agent.remainingDistance <= 0 ? float.PositiveInfinity : Agent.remainingDistance;
 
             if (Agent.pathPending || Mathf.Abs(RemainingDistance) <= 0.1f)      //In Case the remaining Distance is wrong
             {
@@ -602,7 +691,7 @@ namespace YGW
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            if(Look.debug)
+            if (Look.debug)
             {
                 UnityEditor.Handles.color = new Color(1f, 0f, 0f, 0.1f);
 

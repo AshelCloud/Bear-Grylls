@@ -1,5 +1,7 @@
 ﻿using MalbersAnimations;
 using MalbersAnimations.Utilities;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace YGW
@@ -7,43 +9,58 @@ namespace YGW
     public class Tiger : AnimalAI
     {
         #region Variable
+        [SerializeField]
+        private SphereCollider detectSphere;
+        public SphereCollider DetectSphere
+        {
+            get
+            {
+                if(detectSphere == null)
+                {
+                    detectSphere = GetComponent<SphereCollider>();
+                }
+
+                return detectSphere;
+            }
+        }
         #endregion
 
         #region MonoEvents
         private void Start()
         {
+            AnimalComponent.Tier = 1;
             StartAgent();
         }
 
         private void Update()
         {
-            Deer isDeer = null;
-
-            if (Look.Target != null)
-            {
-                isDeer = Utils.GetRoot(Look.Target).GetComponent<Deer>();
-
-                if (isDeer != null)
-                {
-                    State = STATE.HUNT;
-                    SetTarget(Look.Target);
-
-                    if (Vector3.Distance(Look.Target.transform.position, transform.position) < AttackDistance)
-                    {
-                        if(isDeer.GetComponent<Animal>().Death)
-                        {
-                            AnimalComponent.SetAction(2);
-                        }
-                        else if(AttackTime >= AttackRate)
-                        {
-                            AttackTime = 0f;
-                            AnimalComponent.SetAttack(1);
-                        }
-                    }
-                }
-            }
-
             base.Updating();
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if(CurTarget == null) { return; }
+
+            if (Utils.GetRoot(other.transform) == CurTarget)
+            {
+                State = STATE.HUNT;
+                SetTarget(CurTarget);
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if(CurTarget == null) { return; }
+
+            if(Utils.GetRoot(other.transform) == CurTarget)
+            {
+                Target = null;
+                CurTarget = null;
+
+                SetTarget(CurTarget);
+                SetDestination(EcoManager.Instance.GetRandomPosition());
+                State = STATE.IDLE;
+            }
         }
         #endregion
 

@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &925105450971078929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6572014329429031940}
+  - component: {fileID: 2244285189319218429}
+  m_Layer: 20
+  m_Name: DetectSphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6572014329429031940
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925105450971078929}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7381865160663641178}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2244285189319218429
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925105450971078929}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 15.5
+  m_Center: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!1 &7383676637104374954
 GameObject:
   m_ObjectHideFlags: 0
@@ -10481,7 +10525,7 @@ GameObject:
   - component: {fileID: 7385408002163578314}
   - component: {fileID: 1235280500441703}
   m_Layer: 20
-  m_Name: Tiger White AI
+  m_Name: Tiger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10506,6 +10550,7 @@ Transform:
   - {fileID: 7380889664751895026}
   - {fileID: 7381234417739541244}
   - {fileID: 7381933572776478676}
+  - {fileID: 6572014329429031940}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10685,6 +10730,7 @@ MonoBehaviour:
   canFly: 0
   land: 1
   LockUp: 0
+  Tier: 0
   life: 100
   defense: 0
   damageDelay: 0.75
@@ -10834,7 +10880,7 @@ MonoBehaviour:
     offset: {x: 0, y: -90, z: -90}
     weight: 1
   debug: 1
-  viewDistance: 14.71
+  viewDistance: 15
   targetMask:
     serializedVersion: 2
     m_Bits: 1049088
@@ -10881,13 +10927,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f648a21851a972548b9327fa0ab0d4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRate: 1.7
   attackDistance: 3
   attackCollider:
   - {fileID: 7466600679967910416}
   - {fileID: 7465935466805985520}
   AutoSpeed: 1
   ToTrot: 6
-  ToRun: 8
+  ToRun: 10
   stoppingDistance: 0.6
   OnTargetPositionArrived:
     m_PersistentCalls:
@@ -10909,6 +10956,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  detectSphere: {fileID: 0}
 --- !u!114 &1235280500441703
 MonoBehaviour:
   m_ObjectHideFlags: 0

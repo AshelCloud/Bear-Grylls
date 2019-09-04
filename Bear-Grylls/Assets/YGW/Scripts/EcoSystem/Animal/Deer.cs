@@ -13,27 +13,12 @@ namespace YGW
         #region MonoEvents
         private void Start()
         {
+            AnimalComponent.Tier = 4;
             StartAgent();
         }
 
         private void Update()
         {
-            Tiger isTiger = null;
-
-            if (Look.Target != null)
-            {
-                isTiger = Utils.GetRoot(Look.Target).GetComponent<Tiger>();
-                if (isTiger != null)
-                {
-                    State = STATE.RUN;
-                }
-            }
-            else if (AnimalComponent.Damaged == true)
-            {
-                State = STATE.RUN;
-            }
-
-
             base.Updating();
         }
         #endregion
