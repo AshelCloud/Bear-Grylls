@@ -35,7 +35,7 @@ namespace YGW
         {
             get
             {
-                if(boxCollider == null)
+                if (boxCollider == null)
                 {
                     boxCollider = GetComponent<BoxCollider>();
                 }
@@ -59,6 +59,7 @@ namespace YGW
 
         private IEnumerator CSpawn;
         private IEnumerator CDelete;
+
         #endregion
 
         #region MonoEvents
@@ -121,14 +122,14 @@ namespace YGW
             Vector3 minVector = new Vector3(transform.position.x - BoxCollider.size.x, BoxCollider.size.y / 2, transform.position.z - BoxCollider.size.z);
             Vector3 maxVector = new Vector3(transform.position.x + BoxCollider.size.x, BoxCollider.size.y / 2, transform.position.z + BoxCollider.size.z);
 
-            Vector3 random = new Vector3(Random.Range(minVector.x, maxVector.x), Random.Range(minVector.y, maxVector.y), Random.Range(minVector.z, maxVector.z));
+            Vector3 random = new Vector3(Random.Range(minVector.x, maxVector.x), maxVector.y, Random.Range(minVector.z, maxVector.z));
 
             RaycastHit hit;
             Ray ray = new Ray(random, Vector3.down);
-            
-            if(EcoManager.Instance.MapCollider.Raycast(ray, out hit, Mathf.Infinity))
+
+            if(Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("Terrain")))
             {
-                random.y = hit.transform.position.y;
+                random.y = EcoManager.Instance.GetTerrainHeightAtPoint(hit.point);
             }
 
             return random;
@@ -155,7 +156,7 @@ namespace YGW
             while (LimitAnimalCount < CurAnimalCount)
             {
                 var anis = GetComponentsInChildren<T>() as Component[];
-                
+
                 animals.Remove(anis[CurAnimalCount - 1].gameObject);
                 Destroy(anis[CurAnimalCount - 1].gameObject);
 
@@ -165,5 +166,6 @@ namespace YGW
             yield return null;
         }
         #endregion
+
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using MalbersAnimations.Events;
 using MalbersAnimations.Utilities;
-
+using YGW;
 
 namespace MalbersAnimations
 {
@@ -288,6 +288,7 @@ namespace MalbersAnimations
 
 
         #region Attributes Variables (Attack, Damage)
+        public float Tier = 0;
         public float life = 100;
         public float defense = 0;
         public float damageDelay = 0.75f;            //Time before can aply damagage again
