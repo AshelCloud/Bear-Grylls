@@ -2,21 +2,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PSM
 {
     public class TestFirst : MonoBehaviour
     {
-        private void Awake()
+
+        private void Start()
         {
-            Type t = Type.GetType("PSM.ItemBranch");
-            Item asd = (Item)Activator.CreateInstance(t);
 
-            ItemBranch dsa = new ItemBranch();
+            TestSecound.unityEvent.AddListener(asd);
+        }
 
+        private void Update()
+        {
+        }
 
-            print(asd);
-
+        void asd()
+        {
+            transform.Translate(new Vector3(0, 0, 0.1f));
+            print(123);
         }
     }
 }

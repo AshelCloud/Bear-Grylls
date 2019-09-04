@@ -31,19 +31,21 @@ namespace PSM
         [ConditionalHide("editComponentField", true)]
         [SerializeField] private Animator animator;
 
-        [SerializeField] RuntimeAnimatorController[] controller;
+        [SerializeField] RuntimeAnimatorController[] basicControllers;
+        [SerializeField] RuntimeAnimatorController[] specialControllers;
 
+        private PriorityList<RuntimeAnimatorController> basicAniControllers = new PriorityList<RuntimeAnimatorController>();
         private UsingAnimatorManagerComponent[] usingAnimatorComponents;
         #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         #region Function - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        public void ChangeController(string name)
+        public void ApplySpecialController(string name)
         {
             RuntimeAnimatorController FindedContrl = null;
-            for (int i = 0; i < controller.Length; ++i)
+            for (int i = 0; i < specialControllers.Length; ++i)
             {
-                if (controller[i].name == name)
+                if (specialControllers[i].name == name)
                 {
-                    FindedContrl = controller[i];
+                    FindedContrl = specialControllers[i];
                     break;
                 }
             }
@@ -52,12 +54,43 @@ namespace PSM
 
             animator.runtimeAnimatorController = FindedContrl;
         }
+        public void ApplyBasicController()
+        {
+            if(0 <= basicAniControllers.Count - 1)
+                animator.runtimeAnimatorController = basicAniControllers[basicAniControllers.Count-1].data;
+        }
+        public void BasicControllerOn(string controllerNameToOn)
+        {
+            for (int i = 0; i < basicControllers.Length; ++i)
+            {
+                if (basicControllers[i].name == controllerNameToOn)
+                {
+                    basicAniControllers.Add(new PriorityData<RuntimeAnimatorController>(basicControllers[i],i));
+                    if (0 <= basicAniControllers.Count - 1)
+                        animator.runtimeAnimatorController = basicAniControllers[basicAniControllers.Count - 1].data;
+                    break;
+                }
+            }
+        }
+        public void BasicControllerOff(string controllerNameToOff)
+        {
+            for (int i = 0; i < basicAniControllers.Count; ++i)
+            {
+                if (basicAniControllers[i].data.name == controllerNameToOff)
+                {
+                    basicAniControllers.Remove(basicAniControllers[i]);
+                    if (0 <= basicAniControllers.Count - 1)
+                        animator.runtimeAnimatorController = basicAniControllers[basicAniControllers.Count - 1].data;
+                    break;
+                }
+            }
+        }
         #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         #region MonoEvents - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         private void Awake()
         {
             if (animator == null) animator = GetComponent<Animator>();
-
+            basicAniControllers.Add(new PriorityData<RuntimeAnimatorController>(basicControllers[0], 0));
             usingAnimatorComponents = GetComponents<UsingAnimatorManagerComponent>();
         }
         private void Start()

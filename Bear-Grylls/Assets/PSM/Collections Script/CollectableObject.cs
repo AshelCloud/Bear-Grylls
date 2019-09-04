@@ -53,7 +53,7 @@ namespace PSM
         }
     }
 
-
+    [RequireComponent(typeof(cakeslice.Outline))]
     public class CollectableObject : MonoBehaviour
     {
         #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

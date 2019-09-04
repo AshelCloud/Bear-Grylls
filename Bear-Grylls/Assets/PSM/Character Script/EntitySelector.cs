@@ -111,7 +111,7 @@ namespace PSM
 
         public void SubCollisionEnter(Collision collision) { }
         public void SubCollisionStay(Collision collision) { }
-        public void SubOnCollisionExit(Collision collision) { }
+        public void SubCollisionExit(Collision collision) { }
         #endregion - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     }
 }
