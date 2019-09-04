@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace PSM
 {
+    [RequireComponent(typeof(cakeslice.Outline))]
     public class NaturalCollection : CollectableObject, HavingCollectableActionComponent
     {
         #region Variable - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
