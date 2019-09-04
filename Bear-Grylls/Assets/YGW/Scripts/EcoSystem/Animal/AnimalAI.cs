@@ -2,6 +2,7 @@
 using MalbersAnimations.Events;
 using MalbersAnimations.Utilities;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -29,6 +30,53 @@ namespace YGW
 
         }
 
+        protected Animal AnimalComponent
+        {
+            get
+            {
+                return GetComponent<Animal>();
+            }
+        }
+
+        protected float AttackTime { get; set; } = float.MaxValue;
+
+        [SerializeField]
+        private float attackRate;
+        public float AttackRate
+        {
+            get { return attackRate; }
+            set { attackRate = value; }
+        }
+
+        [SerializeField]
+        private float attackDistance;
+        public float AttackDistance
+        {
+            get { return attackDistance; }
+        }
+
+        [SerializeField]
+        private List<SphereCollider> attackCollider;
+        protected List<SphereCollider> AttackCollider
+        {
+            get
+            {
+                if (attackCollider == null)
+                {
+                    var childrens = GetComponentsInChildren<SphereCollider>();
+                    for (int i = 0; i < childrens.Length; i++)
+                    {
+                        if (childrens[i].name.Contains("Attack"))
+                        {
+                            attackCollider.Add(childrens[i]);
+                        }
+                    }
+                }
+
+                return attackCollider;
+            }
+        }
+
         private LookAt look;
         public LookAt Look
         {
@@ -43,7 +91,25 @@ namespace YGW
             }
         }
 
-        protected STATE State { get; set; } = STATE.IDLE;
+        private STATE state;
+        protected STATE State 
+        {
+            get
+            {
+                return state;
+            }
+            set
+            {
+                if(state != value)
+                {
+                    state = value;
+                    if(state == STATE.RUN)
+                    {
+                        SetDestination(EcoManager.Instance.GetRandomPosition());
+                    }
+                }
+            }
+        }
 
         public bool AutoSpeed = true;
         public float ToTrot = 6f;
@@ -129,7 +195,7 @@ namespace YGW
         {
             get
             {
-                if(condition == null)
+                if (condition == null)
                 {
                     condition = GetComponent<ConditionSystem>();
                 }
@@ -138,6 +204,8 @@ namespace YGW
         }
 
         protected ActionZone isActionZone;
+
+        protected Transform CurTarget { get; set; } = null;
 
         //Event Variables
         public Vector3Event OnTargetPositionArrived = new Vector3Event();
@@ -170,6 +238,8 @@ namespace YGW
         /// </summary>
         protected virtual void StartAgent()
         {
+            State = STATE.IDLE;
+
             animal = GetComponent<Animal>();
             animal.OnAnimationChange.AddListener(OnAnimationChanged);           //Listen when the Animations changes..
 
@@ -187,7 +257,7 @@ namespace YGW
 
         protected virtual void Updating()
         {
-            SetState();
+            AttackTime += Time.deltaTime;
 
             if (Stopped)
             {
@@ -211,7 +281,15 @@ namespace YGW
                 else
                     UpdateAgent();
             }
-            
+
+            /*
+            * 탐색 부분
+            */
+            SearchAndTracking();
+            /*
+             * 탐색 부분
+             */
+
             if (Target)
             {
                 if (TargetisMoving) UpdateTargetTransform();
@@ -225,11 +303,92 @@ namespace YGW
             Debug.DrawLine(transform.position, targetPosition, Color.blue);
         }
 
-        private void SetState()
+        protected void SearchAndTracking()
+        {
+            Animal animal = null;
+
+            if (Look.Target != null)
+            {
+                animal = Utils.GetRoot(Look.Target).GetComponent<Animal>();
+
+                if (animal == null) { return; }
+
+                switch (AnimalComponent.Tier)
+                {
+                    case 1:
+                        if (animal.Tier >= AnimalComponent.Tier)
+                        {
+                            CurTarget = animal.transform;
+                            Attack(animal);
+                        }
+                        break;
+
+                    case 2:
+                        if (animal.Tier > AnimalComponent.Tier)
+                        {
+                        }
+                        break;
+                    case 4:
+                        if (animal.Tier < AnimalComponent.Tier)
+                        {
+                            State = STATE.RUN;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (AnimalComponent.Tier)
+                {
+                    case 2:
+                        if (AnimalComponent.Damaged)
+                        {
+                        }
+                        break;
+                    case 3:
+                        if (AnimalComponent.Damaged)
+                        {
+                        }
+                        break;
+                    case 4:
+                        if (AnimalComponent.Damaged)
+                        {
+                            State = STATE.RUN;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void Attack(Animal animal)
+        {
+            if (Vector3.Distance(Look.Target.transform.position, transform.position) < AttackDistance)
+            {
+                if (animal.Death)
+                {
+                    AnimalComponent.SetAction(2);
+                }
+                else if (AttackTime >= AttackRate)
+                {
+                    AttackTime = 0f;
+                    AnimalComponent.SetAttack(1);
+                }
+            }
+        }
+
+        protected void SetState()
         {
             if (Condition.Hungry > 30f)
             {
                 State = STATE.HUNGRY;
+            }
+            else
+            {
+                State = STATE.IDLE;
             }
         }
 
@@ -365,7 +524,7 @@ namespace YGW
             var Direction = Vector3.zero;                               //Reset the Direction (THIS IS THE DIRECTION VECTOR SENT TO THE ANIMAL)  
 
             RemainingDistance = Agent.remainingDistance;                    //Store the remaining distance -- but if navMeshAgent is still looking for a path Keep Moving
-            RemainingDistance = Agent.remainingDistance <=0 ? float.PositiveInfinity : Agent.remainingDistance;
+            RemainingDistance = Agent.remainingDistance <= 0 ? float.PositiveInfinity : Agent.remainingDistance;
 
             if (Agent.pathPending || Mathf.Abs(RemainingDistance) <= 0.1f)      //In Case the remaining Distance is wrong
             {
@@ -547,6 +706,46 @@ namespace YGW
 
             yield return null;
         }
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            if (Look.debug)
+            {
+                UnityEditor.Handles.color = new Color(1f, 0f, 0f, 0.1f);
+
+                var Bones = Look.Bones;
+
+                Transform Center = Bones != null && Bones.Length > 0 && Bones[Bones.Length - 1] != null ? Bones[Bones.Length - 1].bone : null;
+                if (Center != null)
+                {
+                    UnityEditor.Handles.DrawSolidArc(Center.position, Vector3.up, Quaternion.Euler(0, -80, 0) * transform.forward, 80 * 2, AttackDistance);
+                    UnityEditor.Handles.DrawWireArc(Center.position, Vector3.up, Quaternion.Euler(0, -80, 0) * transform.forward, 80 * 2, AttackDistance);
+                }
+            }
+            //if (debug)
+            //{
+            //    UnityEditor.Handles.color = new Color(0, 1, 0, 0.1f);
+
+            //    Transform Center = Bones != null && Bones.Length > 0 && Bones[Bones.Length - 1] != null ? Bones[Bones.Length - 1].bone : null;
+            //    if (Center != null)
+            //    {
+            //        UnityEditor.Handles.DrawSolidArc(Center.position, Vector3.up, Quaternion.Euler(0, -LimitAngle, 0) * transform.forward, LimitAngle * 2, viewDistance);
+            //        UnityEditor.Handles.color = Color.green;
+            //        UnityEditor.Handles.DrawWireArc(Center.position, Vector3.up, Quaternion.Euler(0, -LimitAngle, 0) * transform.forward, LimitAngle * 2, viewDistance);
+            //    }
+            //}
+
+            //if (Application.isPlaying)
+            //{
+
+            //    if (IsAiming)
+            //    {
+            //        Gizmos.color = Color.green;
+            //        Gizmos.DrawSphere(aimHit.point, 0.05f);
+            //    }
+            //}
+        }
+#endif
         #endregion
     }
 }

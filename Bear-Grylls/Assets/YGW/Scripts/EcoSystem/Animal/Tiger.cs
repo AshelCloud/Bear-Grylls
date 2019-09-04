@@ -1,5 +1,7 @@
 ﻿using MalbersAnimations;
 using MalbersAnimations.Utilities;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace YGW
@@ -7,35 +9,62 @@ namespace YGW
     public class Tiger : AnimalAI
     {
         #region Variable
+        [SerializeField]
+        private SphereCollider detectSphere;
+        public SphereCollider DetectSphere
+        {
+            get
+            {
+                if(detectSphere == null)
+                {
+                    detectSphere = GetComponent<SphereCollider>();
+                }
+
+                return detectSphere;
+            }
+        }
         #endregion
 
         #region MonoEvents
         private void Start()
         {
+            AnimalComponent.Tier = 1;
             StartAgent();
         }
 
         private void Update()
         {
-            Deer isDeer = null;
+            base.Updating();
+        }
 
-            if (Look.Target != null)
-            {
-                isDeer = Utils.GetRoot(Look.Target).GetComponent<Deer>();
-            }
+        private void OnTriggerStay(Collider other)
+        {
+            if(CurTarget == null) { return; }
 
-            if (isDeer != null)
+            if (Utils.GetRoot(other.transform) == CurTarget)
             {
                 State = STATE.HUNT;
-                SetTarget(Look.Target);
+                SetTarget(CurTarget);
             }
+        }
 
-            base.Updating();  
+        private void OnTriggerExit(Collider other)
+        {
+            if(CurTarget == null) { return; }
+
+            if(Utils.GetRoot(other.transform) == CurTarget)
+            {
+                Target = null;
+                CurTarget = null;
+
+                SetTarget(CurTarget);
+                SetDestination(EcoManager.Instance.GetRandomPosition());
+                State = STATE.IDLE;
+            }
         }
         #endregion
 
         #region Function
-        
         #endregion
 
         #region Coroutine
