@@ -38,7 +38,7 @@ namespace YGW
             }
         }
 
-        protected float AttackTime { get; set; } = 0f;
+        protected float AttackTime { get; set; } = float.MaxValue;
 
         [SerializeField]
         private float attackRate;
