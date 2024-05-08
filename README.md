@@ -1,5 +1,9 @@
 # Bear-Grylls
 
+## Video
+[![Life](http://img.youtube.com/vi/5saxR2ZMSYg/0.jpg)](https://www.youtube.com/watch?v=5saxR2ZMSYg)
+
+## 개발
 feat: 새로운 기능을 추가할 경우
 
 fix: 버그를 고친 경우
